@@ -1,11 +1,11 @@
-name: flutter
+name: Flutter CI/CD
 
 on:
   push:
-    branches: [ main, feature ]
+    branches: [ main ]
     tags: [ v* ]
   pull_request:
-    branches: [ main ]  
+    branches: [ main ]
 
 jobs:
   test_and_build:
@@ -20,34 +20,34 @@ jobs:
 
     - uses: subosito/flutter-action@v1
       with:
-        flutter-version: '2.2.3'
+        channel: 'stable'
 
     - name: Install dependencies
-    - run: flutter pub get
+      run: flutter pub get
 
     - name: Run tests
-    - run: flutter test
+      run: flutter test
 
     # Note: Integration testing must be properly set up before
     # you can run integration tests.
     # Read more on Flutter integration testing here:
     # https://flutter.dev/docs/testing/integration-tests
     # - name: Run integration tests
-    # - run: flutter drive --target=test_driver/app.dart
+    #   run: flutter drive --target=test_driver/app.dart
 
     # Note: This workflow builds the apk in release mode
     # since the flutter build command defaults to --release.
     # Read more on Flutter build modes here: 
     # https://flutter.dev/docs/testing/build-modes
     # - name: Build release APK
-    # - run: flutter build apk --split-per-abi
+    #   run: flutter build apk --split-per-abi
 
     # Note: Integration testing must be properly set up before
     # you can run integration tests.
     # Read more on Flutter integration testing here:
     # https://flutter.dev/docs/testing/integration-tests
     # - name: Run integration tests
-    # - run: flutter drive --target=test_driver/app.dart
+    #   run: flutter drive --target=test_driver/app.dart
 
   # release:
   #   runs-on: ubuntu-latest
