@@ -1,6 +1,12 @@
-# pipelist
 
-A new Flutter project.
+# Pipelist
+
+[![Flutter CI/CD](https://github.com/pabferir/pipelist/actions/workflows/flutter.yaml/badge.svg)](https://github.com/pabferir/pipelist/actions/workflows/flutter.yaml)
+
+<div align="center">
+    <img height="200" class="center" src="./.github/assets/Pipelist.png" alt="Icon">
+</div>
+
 
 ## Getting Started
 
