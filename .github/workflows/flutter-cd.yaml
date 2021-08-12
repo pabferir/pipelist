@@ -1,0 +1,61 @@
+name: Flutter Continuous Delivery
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ v* ]
+  pull_request:
+    branches: [ main ]  
+
+jobs:
+  test_and_build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '2.2.3'
+
+    - name: Install dependencies
+    - run: flutter pub get
+
+    - name: Run tests
+    - run: flutter test
+
+    # Note: Integration testing must be properly set up before
+    # you can run integration tests.
+    # Read more on Flutter integration testing here:
+    # https://flutter.dev/docs/testing/integration-tests
+    # - name: Run integration tests
+    # - run: flutter drive --target=test_driver/app.dart
+
+    # Note: This workflow builds the apk in release mode
+    # since the flutter build command defaults to --release.
+    # Read more on Flutter build modes here: 
+    # https://flutter.dev/docs/testing/build-modes
+    - name: Build release APK
+    - run: flutter build apk --split-per-abi
+
+    # Note: Integration testing must be properly set up before
+    # you can run integration tests.
+    # Read more on Flutter integration testing here:
+    # https://flutter.dev/docs/testing/integration-tests
+    # - name: Run integration tests
+    # - run: flutter drive --target=test_driver/app.dart
+
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Release on GitHub
+    - uses: actions/checkout@v2
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "build/app/outputs/apk/release/*.apk"
+        token: ${{ secrets.FLUTTER_CICD }}
