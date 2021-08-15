@@ -36,8 +36,10 @@ jobs:
 
     - name: Install dependencies
       # run: flutter packages get
-      run: flutter pub get      
-      
+      run: flutter clean
+      run: flutter pub get
+      run: flutter packages get
+            
     # - name: Check for formatting issues
     #   run: flutter format --set-exit-if-changed
     
