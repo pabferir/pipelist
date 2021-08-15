@@ -34,12 +34,12 @@ jobs:
       with:
         flutter-version: '2.2.3'
 
-    - name: Install dependencies
-      # run: flutter packages get
+    - name: Clean build packages
       run: flutter clean
+
+    - name: Install dependencies      
       run: flutter pub get
-      run: flutter packages get
-            
+
     # - name: Check for formatting issues
     #   run: flutter format --set-exit-if-changed
     
