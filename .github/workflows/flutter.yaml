@@ -14,17 +14,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Cache Flutter dependencies
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-flutter-dependencies
-      with:
-        path: /opt/hostedtoolcache/flutter
-        key: ${{ runner.os }}-flutter-${{ env.cache-name }}-${{ hashFiles('**/pubspec.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-flutter-${{ env.cache-name }}-
-          ${{ runner.os }}-flutter-
-          ${{ runner.os }}-
+    # - name: Cache Flutter dependencies
+    #   uses: actions/cache@v2
+    #   env:
+    #     cache-name: cache-flutter-dependencies
+    #   with:
+    #     path: /opt/hostedtoolcache/flutter
+    #     key: ${{ runner.os }}-flutter-${{ env.cache-name }}-${{ hashFiles('**/pubspec.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-flutter-${{ env.cache-name }}-
+    #       ${{ runner.os }}-flutter-
+    #       ${{ runner.os }}-
           
     - uses: actions/setup-java@v1
       with:
@@ -38,8 +38,8 @@ jobs:
       # run: flutter packages get
       run: flutter pub get      
       
-    - name: Check for formatting issues
-      run: flutter format --set-exit-if-changed
+    # - name: Check for formatting issues
+    #   run: flutter format --set-exit-if-changed
     
     - name: Analyze Dart code
       run: flutter analyze
