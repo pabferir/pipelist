@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pipelist/presentation/navigation/main_screen.dart';
+import 'package:pipelist/presentation/navigation/navigation_screen.dart';
 import 'package:pipelist/presentation/shared/themes.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       title: 'Pipelist',
       theme: lightThemeData(context),
-      home: MainPage(),
+      home: NavigationScreen(),
     );
   }
 }

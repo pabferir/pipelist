@@ -5,14 +5,14 @@ import 'package:pipelist/presentation/shared/themes.dart';
 import 'lists_page.dart';
 import 'review_page.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class NavigationScreen extends StatefulWidget {
+  const NavigationScreen({Key? key}) : super(key: key);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _NavigationScreenState createState() => _NavigationScreenState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _NavigationScreenState extends State<NavigationScreen> {
   int _currentIndex = 0;
   List<Widget> _pages = <Widget>[
     InboxPage(),
