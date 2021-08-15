@@ -15,17 +15,17 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Cache Flutter dependencies
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-flutter-dependencies
-        with:
-          path: /opt/hostedtoolcache/flutter
-          key: ${{ runner.os }}-flutter-${{ env.cache-name }}-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-${{ env.cache-name }}-
-            ${{ runner.os }}-flutter-
-            ${{ runner.os }}-
-
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-flutter-dependencies
+      with:
+        path: /opt/hostedtoolcache/flutter
+        key: ${{ runner.os }}-flutter-${{ env.cache-name }}-${{ hashFiles('**/pubspec.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-flutter-${{ env.cache-name }}-
+          ${{ runner.os }}-flutter-
+          ${{ runner.os }}-
+          
     - uses: actions/setup-java@v1
       with:
         java-version: '12.x'
