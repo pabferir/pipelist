@@ -2,7 +2,7 @@ name: Flutter CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature* ]
     tags: [ v* ]
   pull_request:
     branches: [ main ]
@@ -14,16 +14,37 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    # - name: Cache Flutter dependencies
+    #   uses: actions/cache@v2
+    #   env:
+    #     cache-name: cache-flutter-dependencies
+    #   with:
+    #     path: /opt/hostedtoolcache/flutter
+    #     key: ${{ runner.os }}-flutter-${{ env.cache-name }}-${{ hashFiles('**/pubspec.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-flutter-${{ env.cache-name }}-
+    #       ${{ runner.os }}-flutter-
+    #       ${{ runner.os }}-
+          
     - uses: actions/setup-java@v1
       with:
         java-version: '12.x'
 
     - uses: subosito/flutter-action@v1
       with:
-        channel: 'stable'
+        flutter-version: '2.2.3'
 
-    - name: Install dependencies
+    - name: Clean build packages
+      run: flutter clean
+
+    - name: Install dependencies      
       run: flutter pub get
+
+    # - name: Check for formatting issues
+    #   run: flutter format --set-exit-if-changed
+    
+    - name: Analyze Dart code
+      run: flutter analyze
 
     - name: Run tests
       run: flutter test
@@ -42,12 +63,11 @@ jobs:
     # - name: Build release APK
     #   run: flutter build apk --split-per-abi
 
-    # Note: Integration testing must be properly set up before
-    # you can run integration tests.
-    # Read more on Flutter integration testing here:
-    # https://flutter.dev/docs/testing/integration-tests
-    # - name: Run integration tests
-    #   run: flutter drive --target=test_driver/app.dart
+    # Upload generated apk to the artifacts.
+    # - uses: actions/upload-artifact@v1
+    #   with:
+    #     name: release-apk
+    #     path: build/app/outputs/apk/release/app-release.apk
 
   # release:
   #   runs-on: ubuntu-latest
