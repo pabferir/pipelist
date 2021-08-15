@@ -4,8 +4,8 @@ on:
   push:
     branches: [ main, feature* ]
     tags: [ v* ]
-  # pull_request:
-  #   branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   test_and_build:
@@ -23,13 +23,14 @@ jobs:
         flutter-version: '2.2.3'
 
     - name: Install dependencies
-      run: flutter pub get
+      # run: flutter packages get
+      run: flutter pub get      
       
-    # Check for any formatting issues in the code.
-    - run: flutter format --set-exit-if-changed .
+    - name: Check for formatting issues
+      run: flutter format --set-exit-if-changed
     
-    # Statically analyze the Dart code for any errors.
-    - run: flutter analyze .
+    - name: Analyze Dart code
+      run: flutter analyze
 
     - name: Run tests
       run: flutter test
