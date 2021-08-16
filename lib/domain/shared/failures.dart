@@ -9,21 +9,25 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
     @required T? failedValue,
   }) = EmptyField<T>;
 
-  const factory ValueFailure.noListId({
+  const factory ValueFailure.multilineField({
     @required T? failedValue,
-  }) = NoListId<T>;
+  }) = MultilineField<T>;
 
-  const factory ValueFailure.exceedingLenght({
+  const factory ValueFailure.exceedingLength({
     @required T? failedValue,
     @required int? maxLength,
   }) = ExceedingLength<T>;
 
-  const factory ValueFailure.exceedingListSize({
+  const factory ValueFailure.exceedingListLength({
     @required T? failedValue,
     @required int? maxLength,
-  }) = ExceedingListSize<T>;
+  }) = ExceedingListLength<T>;
 
   const factory ValueFailure.dateAlreadyPassed({
     @required T? failedValue,
   }) = DateAlreadyPassed<T>;
+
+  const factory ValueFailure.priorityOutOfRange({
+    @required T? failedValue,
+  }) = PriorityOutOfRange<T>;
 }
