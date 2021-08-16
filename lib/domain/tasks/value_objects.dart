@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:pipelist/domain/shared/failures.dart';
-import 'package:pipelist/domain/shared/value_object.dart';
+import 'package:pipelist/domain/shared/value_objects.dart';
 import 'package:pipelist/domain/shared/value_validators.dart';
 
 class TaskTitle extends ValueObject<String> {
