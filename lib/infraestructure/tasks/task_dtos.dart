@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pipelist/domain/shared/value_objects.dart';
 import 'package:pipelist/domain/tasks/subtask.dart';
+import 'package:pipelist/domain/tasks/tag.dart';
 import 'package:pipelist/domain/tasks/task.dart';
 import 'package:pipelist/domain/tasks/value_objects.dart';
 import 'package:kt_dart/kt.dart';
@@ -23,7 +24,7 @@ abstract class TaskDto implements _$TaskDto {
     @required @DateTimeTimestampConverter() DateTime? startDate,
     @required @DateTimeTimestampConverter() DateTime? dueDate,
     @required @DateTimeTimestampConverter() DateTime? reminder,
-    //List<Tag> tags,
+    @required List<TagDto>? tags,
     @required List<SubtaskDto>? subtasks,
     @required @ServerTimestampConverter() FieldValue? serverTimestamp,
   }) = _TaskDto;
@@ -47,10 +48,12 @@ abstract class TaskDto implements _$TaskDto {
 
   TaskEntity toDomain() {
     return TaskEntity(
-        id: UniqueId.fromUniqueString(id!),
-        title: TaskTitle(title!),
-        subtasks: SubtaskList(
-            subtasks!.map((dto) => dto.toDomain()).toImmutableList()));
+      id: UniqueId.fromUniqueString(id!),
+      title: TaskTitle(title!),
+      tags: TagList(tags!.map((dto) => dto.toDomain()).toImmutableList()),
+      subtasks:
+          SubtaskList(subtasks!.map((dto) => dto.toDomain()).toImmutableList()),
+    );
   }
 
   factory TaskDto.fromJson(Map<String, dynamic> json) =>
@@ -60,6 +63,29 @@ abstract class TaskDto implements _$TaskDto {
     return TaskDto.fromJson(doc.data() as Map<String, dynamic>)
         .copyWith(id: doc.id);
   }
+}
+
+@freezed
+abstract class TagDto implements _$TagDto {
+  const TagDto._();
+
+  const factory TagDto({
+    @required String? id,
+    @required String? title,
+  }) = _TagDto;
+
+  factory TagDto.fromDomain(Tag tag) {
+    return TagDto(
+      id: tag.id!.getOrCrash(),
+      title: tag.title!.getOrCrash(),
+    );
+  }
+
+  Tag toDomain() {
+    return Tag(id: UniqueId.fromUniqueString(id!), title: TagTitle(title!));
+  }
+
+  factory TagDto.fromJson(Map<String, dynamic> json) => _$TagDtoFromJson(json);
 }
 
 @freezed

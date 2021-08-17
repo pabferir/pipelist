@@ -29,6 +29,7 @@ class _$TaskDtoTearOff {
       @DateTimeTimestampConverter() DateTime? startDate,
       @DateTimeTimestampConverter() DateTime? dueDate,
       @DateTimeTimestampConverter() DateTime? reminder,
+      List<TagDto>? tags,
       List<SubtaskDto>? subtasks,
       @ServerTimestampConverter() FieldValue? serverTimestamp}) {
     return _TaskDto(
@@ -40,6 +41,7 @@ class _$TaskDtoTearOff {
       startDate: startDate,
       dueDate: dueDate,
       reminder: reminder,
+      tags: tags,
       subtasks: subtasks,
       serverTimestamp: serverTimestamp,
     );
@@ -67,8 +69,8 @@ mixin _$TaskDto {
   @DateTimeTimestampConverter()
   DateTime? get dueDate => throw _privateConstructorUsedError;
   @DateTimeTimestampConverter()
-  DateTime? get reminder =>
-      throw _privateConstructorUsedError; //List<Tag> tags,
+  DateTime? get reminder => throw _privateConstructorUsedError;
+  List<TagDto>? get tags => throw _privateConstructorUsedError;
   List<SubtaskDto>? get subtasks => throw _privateConstructorUsedError;
   @ServerTimestampConverter()
   FieldValue? get serverTimestamp => throw _privateConstructorUsedError;
@@ -91,6 +93,7 @@ abstract class $TaskDtoCopyWith<$Res> {
       @DateTimeTimestampConverter() DateTime? startDate,
       @DateTimeTimestampConverter() DateTime? dueDate,
       @DateTimeTimestampConverter() DateTime? reminder,
+      List<TagDto>? tags,
       List<SubtaskDto>? subtasks,
       @ServerTimestampConverter() FieldValue? serverTimestamp});
 }
@@ -113,6 +116,7 @@ class _$TaskDtoCopyWithImpl<$Res> implements $TaskDtoCopyWith<$Res> {
     Object? startDate = freezed,
     Object? dueDate = freezed,
     Object? reminder = freezed,
+    Object? tags = freezed,
     Object? subtasks = freezed,
     Object? serverTimestamp = freezed,
   }) {
@@ -149,6 +153,10 @@ class _$TaskDtoCopyWithImpl<$Res> implements $TaskDtoCopyWith<$Res> {
           ? _value.reminder
           : reminder // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<TagDto>?,
       subtasks: subtasks == freezed
           ? _value.subtasks
           : subtasks // ignore: cast_nullable_to_non_nullable
@@ -175,6 +183,7 @@ abstract class _$TaskDtoCopyWith<$Res> implements $TaskDtoCopyWith<$Res> {
       @DateTimeTimestampConverter() DateTime? startDate,
       @DateTimeTimestampConverter() DateTime? dueDate,
       @DateTimeTimestampConverter() DateTime? reminder,
+      List<TagDto>? tags,
       List<SubtaskDto>? subtasks,
       @ServerTimestampConverter() FieldValue? serverTimestamp});
 }
@@ -198,6 +207,7 @@ class __$TaskDtoCopyWithImpl<$Res> extends _$TaskDtoCopyWithImpl<$Res>
     Object? startDate = freezed,
     Object? dueDate = freezed,
     Object? reminder = freezed,
+    Object? tags = freezed,
     Object? subtasks = freezed,
     Object? serverTimestamp = freezed,
   }) {
@@ -234,6 +244,10 @@ class __$TaskDtoCopyWithImpl<$Res> extends _$TaskDtoCopyWithImpl<$Res>
           ? _value.reminder
           : reminder // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<TagDto>?,
       subtasks: subtasks == freezed
           ? _value.subtasks
           : subtasks // ignore: cast_nullable_to_non_nullable
@@ -258,6 +272,7 @@ class _$_TaskDto extends _TaskDto {
       @DateTimeTimestampConverter() this.startDate,
       @DateTimeTimestampConverter() this.dueDate,
       @DateTimeTimestampConverter() this.reminder,
+      this.tags,
       this.subtasks,
       @ServerTimestampConverter() this.serverTimestamp})
       : super._();
@@ -285,7 +300,9 @@ class _$_TaskDto extends _TaskDto {
   @override
   @DateTimeTimestampConverter()
   final DateTime? reminder;
-  @override //List<Tag> tags,
+  @override
+  final List<TagDto>? tags;
+  @override
   final List<SubtaskDto>? subtasks;
   @override
   @ServerTimestampConverter()
@@ -293,7 +310,7 @@ class _$_TaskDto extends _TaskDto {
 
   @override
   String toString() {
-    return 'TaskDto(id: $id, title: $title, isDone: $isDone, priority: $priority, description: $description, startDate: $startDate, dueDate: $dueDate, reminder: $reminder, subtasks: $subtasks, serverTimestamp: $serverTimestamp)';
+    return 'TaskDto(id: $id, title: $title, isDone: $isDone, priority: $priority, description: $description, startDate: $startDate, dueDate: $dueDate, reminder: $reminder, tags: $tags, subtasks: $subtasks, serverTimestamp: $serverTimestamp)';
   }
 
   @override
@@ -321,6 +338,8 @@ class _$_TaskDto extends _TaskDto {
             (identical(other.reminder, reminder) ||
                 const DeepCollectionEquality()
                     .equals(other.reminder, reminder)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.subtasks, subtasks) ||
                 const DeepCollectionEquality()
                     .equals(other.subtasks, subtasks)) &&
@@ -340,6 +359,7 @@ class _$_TaskDto extends _TaskDto {
       const DeepCollectionEquality().hash(startDate) ^
       const DeepCollectionEquality().hash(dueDate) ^
       const DeepCollectionEquality().hash(reminder) ^
+      const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(subtasks) ^
       const DeepCollectionEquality().hash(serverTimestamp);
 
@@ -364,6 +384,7 @@ abstract class _TaskDto extends TaskDto {
       @DateTimeTimestampConverter() DateTime? startDate,
       @DateTimeTimestampConverter() DateTime? dueDate,
       @DateTimeTimestampConverter() DateTime? reminder,
+      List<TagDto>? tags,
       List<SubtaskDto>? subtasks,
       @ServerTimestampConverter() FieldValue? serverTimestamp}) = _$_TaskDto;
   const _TaskDto._() : super._();
@@ -390,7 +411,9 @@ abstract class _TaskDto extends TaskDto {
   @override
   @DateTimeTimestampConverter()
   DateTime? get reminder => throw _privateConstructorUsedError;
-  @override //List<Tag> tags,
+  @override
+  List<TagDto>? get tags => throw _privateConstructorUsedError;
+  @override
   List<SubtaskDto>? get subtasks => throw _privateConstructorUsedError;
   @override
   @ServerTimestampConverter()
@@ -399,6 +422,167 @@ abstract class _TaskDto extends TaskDto {
   @JsonKey(ignore: true)
   _$TaskDtoCopyWith<_TaskDto> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+TagDto _$TagDtoFromJson(Map<String, dynamic> json) {
+  return _TagDto.fromJson(json);
+}
+
+/// @nodoc
+class _$TagDtoTearOff {
+  const _$TagDtoTearOff();
+
+  _TagDto call({String? id, String? title}) {
+    return _TagDto(
+      id: id,
+      title: title,
+    );
+  }
+
+  TagDto fromJson(Map<String, Object> json) {
+    return TagDto.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $TagDto = _$TagDtoTearOff();
+
+/// @nodoc
+mixin _$TagDto {
+  String? get id => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TagDtoCopyWith<TagDto> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TagDtoCopyWith<$Res> {
+  factory $TagDtoCopyWith(TagDto value, $Res Function(TagDto) then) =
+      _$TagDtoCopyWithImpl<$Res>;
+  $Res call({String? id, String? title});
+}
+
+/// @nodoc
+class _$TagDtoCopyWithImpl<$Res> implements $TagDtoCopyWith<$Res> {
+  _$TagDtoCopyWithImpl(this._value, this._then);
+
+  final TagDto _value;
+  // ignore: unused_field
+  final $Res Function(TagDto) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? title = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$TagDtoCopyWith<$Res> implements $TagDtoCopyWith<$Res> {
+  factory _$TagDtoCopyWith(_TagDto value, $Res Function(_TagDto) then) =
+      __$TagDtoCopyWithImpl<$Res>;
+  @override
+  $Res call({String? id, String? title});
+}
+
+/// @nodoc
+class __$TagDtoCopyWithImpl<$Res> extends _$TagDtoCopyWithImpl<$Res>
+    implements _$TagDtoCopyWith<$Res> {
+  __$TagDtoCopyWithImpl(_TagDto _value, $Res Function(_TagDto) _then)
+      : super(_value, (v) => _then(v as _TagDto));
+
+  @override
+  _TagDto get _value => super._value as _TagDto;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? title = freezed,
+  }) {
+    return _then(_TagDto(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_TagDto extends _TagDto {
+  const _$_TagDto({this.id, this.title}) : super._();
+
+  factory _$_TagDto.fromJson(Map<String, dynamic> json) =>
+      _$_$_TagDtoFromJson(json);
+
+  @override
+  final String? id;
+  @override
+  final String? title;
+
+  @override
+  String toString() {
+    return 'TagDto(id: $id, title: $title)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _TagDto &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(title);
+
+  @JsonKey(ignore: true)
+  @override
+  _$TagDtoCopyWith<_TagDto> get copyWith =>
+      __$TagDtoCopyWithImpl<_TagDto>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_TagDtoToJson(this);
+  }
+}
+
+abstract class _TagDto extends TagDto {
+  const factory _TagDto({String? id, String? title}) = _$_TagDto;
+  const _TagDto._() : super._();
+
+  factory _TagDto.fromJson(Map<String, dynamic> json) = _$_TagDto.fromJson;
+
+  @override
+  String? get id => throw _privateConstructorUsedError;
+  @override
+  String? get title => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$TagDtoCopyWith<_TagDto> get copyWith => throw _privateConstructorUsedError;
 }
 
 SubtaskDto _$SubtaskDtoFromJson(Map<String, dynamic> json) {

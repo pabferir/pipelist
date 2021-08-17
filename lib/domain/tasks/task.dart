@@ -4,6 +4,7 @@ import 'package:kt_dart/collection.dart';
 import 'package:pipelist/domain/shared/failures.dart';
 import 'package:pipelist/domain/shared/value_objects.dart';
 import 'package:pipelist/domain/tasks/subtask.dart';
+import 'package:pipelist/domain/tasks/tag.dart';
 import 'package:pipelist/domain/tasks/value_objects.dart';
 
 part 'task.freezed.dart';
@@ -22,12 +23,15 @@ abstract class TaskEntity implements _$TaskEntity {
     DateTime? startDate,
     DateTime? dueDate,
     Reminder? reminder,
-    //List<Tag> tags,
+    required TagList<Tag> tags,
     required SubtaskList<Subtask> subtasks,
   }) = _TaskEntity;
 
   factory TaskEntity.empty() => TaskEntity(
-      id: UniqueId(), title: TaskTitle(''), subtasks: SubtaskList(emptyList()));
+      id: UniqueId(),
+      title: TaskTitle(''),
+      tags: TagList(emptyList()),
+      subtasks: SubtaskList(emptyList()));
 
   Option<ValueFailure<dynamic>> get failureOption {
     return title!.failureOrUnit

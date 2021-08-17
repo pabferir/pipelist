@@ -10,6 +10,7 @@ import 'package:pipelist/domain/tasks/task.dart';
 import 'package:pipelist/domain/tasks/task_failure.dart';
 import 'package:pipelist/domain/tasks/value_objects.dart';
 import 'package:pipelist/presentation/tasks/task_form/subtask_presentation_classes.dart';
+import 'package:pipelist/presentation/tasks/task_form/tag_presentation_classes.dart';
 
 part 'task_form_event.dart';
 part 'task_form_state.dart';
@@ -28,13 +29,15 @@ class TaskFormBloc extends Bloc<TaskFormEvent, TaskFormState> {
     TaskFormEvent event,
   ) async* {
     yield* event.map(initialized: (e) async* {
-      // yield e.initialTask.fold(
-      //   () => state,
-      //   (initialTask) => state.copyWith(
-      //     task: initialTask,
-      //     isEditing: true,
-      //   ),
-      // );
+      yield e.initialTask.fold(
+        () => state,
+        (initialTask) {
+          return state.copyWith(
+            task: initialTask,
+            isEditing: true,
+          );
+        },
+      );
     }, titleChanged: (e) async* {
       yield state.copyWith(
         task: state.task!.copyWith(title: TaskTitle(e.newTitle)),
@@ -68,6 +71,12 @@ class TaskFormBloc extends Bloc<TaskFormEvent, TaskFormState> {
     }, reminderChanged: (e) async* {
       yield state.copyWith(
         task: state.task!.copyWith(reminder: Reminder(e.newReminder)),
+        saveFailureOrSuccessOption: none(),
+      );
+    }, tagsChanged: (e) async* {
+      yield state.copyWith(
+        task: state.task!.copyWith(
+            tags: TagList(e.newTags.map((primitive) => primitive.toDomain()))),
         saveFailureOrSuccessOption: none(),
       );
     }, subtasksChanged: (e) async* {

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$TaskFormEventTearOff {
   const _$TaskFormEventTearOff();
 
-  _Initialized initialized(TaskEntity initialTask) {
+  _Initialized initialized(Option<TaskEntity> initialTask) {
     return _Initialized(
       initialTask,
     );
@@ -64,6 +64,12 @@ class _$TaskFormEventTearOff {
     );
   }
 
+  _TagsChanged tagsChanged(KtList<TagPrimitive> newTags) {
+    return _TagsChanged(
+      newTags,
+    );
+  }
+
   _SubtasksChanged subtasksChanged(KtList<SubtaskPrimitive> newSubtasks) {
     return _SubtasksChanged(
       newSubtasks,
@@ -82,7 +88,7 @@ const $TaskFormEvent = _$TaskFormEventTearOff();
 mixin _$TaskFormEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -90,6 +96,7 @@ mixin _$TaskFormEvent {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -97,7 +104,7 @@ mixin _$TaskFormEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -105,6 +112,7 @@ mixin _$TaskFormEvent {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -120,6 +128,7 @@ mixin _$TaskFormEvent {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) =>
@@ -134,6 +143,7 @@ mixin _$TaskFormEvent {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -163,9 +173,7 @@ abstract class _$InitializedCopyWith<$Res> {
   factory _$InitializedCopyWith(
           _Initialized value, $Res Function(_Initialized) then) =
       __$InitializedCopyWithImpl<$Res>;
-  $Res call({TaskEntity initialTask});
-
-  $TaskEntityCopyWith<$Res> get initialTask;
+  $Res call({Option<TaskEntity> initialTask});
 }
 
 /// @nodoc
@@ -186,15 +194,8 @@ class __$InitializedCopyWithImpl<$Res> extends _$TaskFormEventCopyWithImpl<$Res>
       initialTask == freezed
           ? _value.initialTask
           : initialTask // ignore: cast_nullable_to_non_nullable
-              as TaskEntity,
+              as Option<TaskEntity>,
     ));
-  }
-
-  @override
-  $TaskEntityCopyWith<$Res> get initialTask {
-    return $TaskEntityCopyWith<$Res>(_value.initialTask, (value) {
-      return _then(_value.copyWith(initialTask: value));
-    });
   }
 }
 
@@ -204,7 +205,7 @@ class _$_Initialized implements _Initialized {
   const _$_Initialized(this.initialTask);
 
   @override
-  final TaskEntity initialTask;
+  final Option<TaskEntity> initialTask;
 
   @override
   String toString() {
@@ -232,7 +233,7 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -240,6 +241,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -250,7 +252,7 @@ class _$_Initialized implements _Initialized {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -258,6 +260,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -279,6 +282,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -296,6 +300,7 @@ class _$_Initialized implements _Initialized {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -308,9 +313,9 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements TaskFormEvent {
-  const factory _Initialized(TaskEntity initialTask) = _$_Initialized;
+  const factory _Initialized(Option<TaskEntity> initialTask) = _$_Initialized;
 
-  TaskEntity get initialTask => throw _privateConstructorUsedError;
+  Option<TaskEntity> get initialTask => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$InitializedCopyWith<_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
@@ -382,7 +387,7 @@ class _$_TitleChanged implements _TitleChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -390,6 +395,7 @@ class _$_TitleChanged implements _TitleChanged {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -400,7 +406,7 @@ class _$_TitleChanged implements _TitleChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -408,6 +414,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -429,6 +436,7 @@ class _$_TitleChanged implements _TitleChanged {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -446,6 +454,7 @@ class _$_TitleChanged implements _TitleChanged {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -532,7 +541,7 @@ class _$_IsDoneChanged implements _IsDoneChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -540,6 +549,7 @@ class _$_IsDoneChanged implements _IsDoneChanged {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -550,7 +560,7 @@ class _$_IsDoneChanged implements _IsDoneChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -558,6 +568,7 @@ class _$_IsDoneChanged implements _IsDoneChanged {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -579,6 +590,7 @@ class _$_IsDoneChanged implements _IsDoneChanged {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -596,6 +608,7 @@ class _$_IsDoneChanged implements _IsDoneChanged {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -682,7 +695,7 @@ class _$_PriorityChanged implements _PriorityChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -690,6 +703,7 @@ class _$_PriorityChanged implements _PriorityChanged {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -700,7 +714,7 @@ class _$_PriorityChanged implements _PriorityChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -708,6 +722,7 @@ class _$_PriorityChanged implements _PriorityChanged {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -729,6 +744,7 @@ class _$_PriorityChanged implements _PriorityChanged {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -746,6 +762,7 @@ class _$_PriorityChanged implements _PriorityChanged {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -833,7 +850,7 @@ class _$_DescriptionChanged implements _DescriptionChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -841,6 +858,7 @@ class _$_DescriptionChanged implements _DescriptionChanged {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -851,7 +869,7 @@ class _$_DescriptionChanged implements _DescriptionChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -859,6 +877,7 @@ class _$_DescriptionChanged implements _DescriptionChanged {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -880,6 +899,7 @@ class _$_DescriptionChanged implements _DescriptionChanged {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -897,6 +917,7 @@ class _$_DescriptionChanged implements _DescriptionChanged {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -984,7 +1005,7 @@ class _$_StartDateChanged implements _StartDateChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -992,6 +1013,7 @@ class _$_StartDateChanged implements _StartDateChanged {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -1002,7 +1024,7 @@ class _$_StartDateChanged implements _StartDateChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -1010,6 +1032,7 @@ class _$_StartDateChanged implements _StartDateChanged {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -1031,6 +1054,7 @@ class _$_StartDateChanged implements _StartDateChanged {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -1048,6 +1072,7 @@ class _$_StartDateChanged implements _StartDateChanged {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -1134,7 +1159,7 @@ class _$_DueDateChanged implements _DueDateChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -1142,6 +1167,7 @@ class _$_DueDateChanged implements _DueDateChanged {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -1152,7 +1178,7 @@ class _$_DueDateChanged implements _DueDateChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -1160,6 +1186,7 @@ class _$_DueDateChanged implements _DueDateChanged {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -1181,6 +1208,7 @@ class _$_DueDateChanged implements _DueDateChanged {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -1198,6 +1226,7 @@ class _$_DueDateChanged implements _DueDateChanged {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -1284,7 +1313,7 @@ class _$_ReminderChanged implements _ReminderChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -1292,6 +1321,7 @@ class _$_ReminderChanged implements _ReminderChanged {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -1302,7 +1332,7 @@ class _$_ReminderChanged implements _ReminderChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -1310,6 +1340,7 @@ class _$_ReminderChanged implements _ReminderChanged {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -1331,6 +1362,7 @@ class _$_ReminderChanged implements _ReminderChanged {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -1348,6 +1380,7 @@ class _$_ReminderChanged implements _ReminderChanged {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -1365,6 +1398,158 @@ abstract class _ReminderChanged implements TaskFormEvent {
   DateTime get newReminder => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ReminderChangedCopyWith<_ReminderChanged> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$TagsChangedCopyWith<$Res> {
+  factory _$TagsChangedCopyWith(
+          _TagsChanged value, $Res Function(_TagsChanged) then) =
+      __$TagsChangedCopyWithImpl<$Res>;
+  $Res call({KtList<TagPrimitive> newTags});
+}
+
+/// @nodoc
+class __$TagsChangedCopyWithImpl<$Res> extends _$TaskFormEventCopyWithImpl<$Res>
+    implements _$TagsChangedCopyWith<$Res> {
+  __$TagsChangedCopyWithImpl(
+      _TagsChanged _value, $Res Function(_TagsChanged) _then)
+      : super(_value, (v) => _then(v as _TagsChanged));
+
+  @override
+  _TagsChanged get _value => super._value as _TagsChanged;
+
+  @override
+  $Res call({
+    Object? newTags = freezed,
+  }) {
+    return _then(_TagsChanged(
+      newTags == freezed
+          ? _value.newTags
+          : newTags // ignore: cast_nullable_to_non_nullable
+              as KtList<TagPrimitive>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_TagsChanged implements _TagsChanged {
+  const _$_TagsChanged(this.newTags);
+
+  @override
+  final KtList<TagPrimitive> newTags;
+
+  @override
+  String toString() {
+    return 'TaskFormEvent.tagsChanged(newTags: $newTags)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _TagsChanged &&
+            (identical(other.newTags, newTags) ||
+                const DeepCollectionEquality().equals(other.newTags, newTags)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(newTags);
+
+  @JsonKey(ignore: true)
+  @override
+  _$TagsChangedCopyWith<_TagsChanged> get copyWith =>
+      __$TagsChangedCopyWithImpl<_TagsChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
+    required TResult Function(String newTitle) titleChanged,
+    required TResult Function(bool newIsDone) isDoneChanged,
+    required TResult Function(int newPriority) priorityChanged,
+    required TResult Function(String newDescription) descriptionChanged,
+    required TResult Function(DateTime newStartDate) startDateChanged,
+    required TResult Function(DateTime newDueDate) dueDateChanged,
+    required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
+    required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
+        subtasksChanged,
+    required TResult Function() saved,
+  }) {
+    return tagsChanged(newTags);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
+    TResult Function(String newTitle)? titleChanged,
+    TResult Function(bool newIsDone)? isDoneChanged,
+    TResult Function(int newPriority)? priorityChanged,
+    TResult Function(String newDescription)? descriptionChanged,
+    TResult Function(DateTime newStartDate)? startDateChanged,
+    TResult Function(DateTime newDueDate)? dueDateChanged,
+    TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
+    TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
+    TResult Function()? saved,
+    required TResult orElse(),
+  }) {
+    if (tagsChanged != null) {
+      return tagsChanged(newTags);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_TitleChanged value) titleChanged,
+    required TResult Function(_IsDoneChanged value) isDoneChanged,
+    required TResult Function(_PriorityChanged value) priorityChanged,
+    required TResult Function(_DescriptionChanged value) descriptionChanged,
+    required TResult Function(_StartDateChanged value) startDateChanged,
+    required TResult Function(_DueDateChanged value) dueDateChanged,
+    required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
+    required TResult Function(_SubtasksChanged value) subtasksChanged,
+    required TResult Function(_Saved value) saved,
+  }) {
+    return tagsChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_TitleChanged value)? titleChanged,
+    TResult Function(_IsDoneChanged value)? isDoneChanged,
+    TResult Function(_PriorityChanged value)? priorityChanged,
+    TResult Function(_DescriptionChanged value)? descriptionChanged,
+    TResult Function(_StartDateChanged value)? startDateChanged,
+    TResult Function(_DueDateChanged value)? dueDateChanged,
+    TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
+    TResult Function(_SubtasksChanged value)? subtasksChanged,
+    TResult Function(_Saved value)? saved,
+    required TResult orElse(),
+  }) {
+    if (tagsChanged != null) {
+      return tagsChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TagsChanged implements TaskFormEvent {
+  const factory _TagsChanged(KtList<TagPrimitive> newTags) = _$_TagsChanged;
+
+  KtList<TagPrimitive> get newTags => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$TagsChangedCopyWith<_TagsChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1434,7 +1619,7 @@ class _$_SubtasksChanged implements _SubtasksChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -1442,6 +1627,7 @@ class _$_SubtasksChanged implements _SubtasksChanged {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -1452,7 +1638,7 @@ class _$_SubtasksChanged implements _SubtasksChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -1460,6 +1646,7 @@ class _$_SubtasksChanged implements _SubtasksChanged {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -1481,6 +1668,7 @@ class _$_SubtasksChanged implements _SubtasksChanged {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -1498,6 +1686,7 @@ class _$_SubtasksChanged implements _SubtasksChanged {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),
@@ -1557,7 +1746,7 @@ class _$_Saved implements _Saved {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TaskEntity initialTask) initialized,
+    required TResult Function(Option<TaskEntity> initialTask) initialized,
     required TResult Function(String newTitle) titleChanged,
     required TResult Function(bool newIsDone) isDoneChanged,
     required TResult Function(int newPriority) priorityChanged,
@@ -1565,6 +1754,7 @@ class _$_Saved implements _Saved {
     required TResult Function(DateTime newStartDate) startDateChanged,
     required TResult Function(DateTime newDueDate) dueDateChanged,
     required TResult Function(DateTime newReminder) reminderChanged,
+    required TResult Function(KtList<TagPrimitive> newTags) tagsChanged,
     required TResult Function(KtList<SubtaskPrimitive> newSubtasks)
         subtasksChanged,
     required TResult Function() saved,
@@ -1575,7 +1765,7 @@ class _$_Saved implements _Saved {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskEntity initialTask)? initialized,
+    TResult Function(Option<TaskEntity> initialTask)? initialized,
     TResult Function(String newTitle)? titleChanged,
     TResult Function(bool newIsDone)? isDoneChanged,
     TResult Function(int newPriority)? priorityChanged,
@@ -1583,6 +1773,7 @@ class _$_Saved implements _Saved {
     TResult Function(DateTime newStartDate)? startDateChanged,
     TResult Function(DateTime newDueDate)? dueDateChanged,
     TResult Function(DateTime newReminder)? reminderChanged,
+    TResult Function(KtList<TagPrimitive> newTags)? tagsChanged,
     TResult Function(KtList<SubtaskPrimitive> newSubtasks)? subtasksChanged,
     TResult Function()? saved,
     required TResult orElse(),
@@ -1604,6 +1795,7 @@ class _$_Saved implements _Saved {
     required TResult Function(_StartDateChanged value) startDateChanged,
     required TResult Function(_DueDateChanged value) dueDateChanged,
     required TResult Function(_ReminderChanged value) reminderChanged,
+    required TResult Function(_TagsChanged value) tagsChanged,
     required TResult Function(_SubtasksChanged value) subtasksChanged,
     required TResult Function(_Saved value) saved,
   }) {
@@ -1621,6 +1813,7 @@ class _$_Saved implements _Saved {
     TResult Function(_StartDateChanged value)? startDateChanged,
     TResult Function(_DueDateChanged value)? dueDateChanged,
     TResult Function(_ReminderChanged value)? reminderChanged,
+    TResult Function(_TagsChanged value)? tagsChanged,
     TResult Function(_SubtasksChanged value)? subtasksChanged,
     TResult Function(_Saved value)? saved,
     required TResult orElse(),

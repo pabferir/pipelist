@@ -64,6 +64,23 @@ class Reminder extends ValueObject<DateTime> {
   const Reminder._(this.value);
 }
 
+class TagTitle extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  static const maxLength = 12;
+
+  factory TagTitle(String input) {
+    return TagTitle._(
+      validateMaxStringLength(input, maxLength)
+          .flatMap(validateStringNotEmpty)
+          .flatMap(validateSingleLineString),
+    );
+  }
+
+  const TagTitle._(this.value);
+}
+
 class TagList<T> extends ValueObject<KtList<T>> {
   @override
   final Either<ValueFailure<KtList<T>>, KtList<T>> value;

@@ -25,6 +25,7 @@ class _$TaskEntityTearOff {
       DateTime? startDate,
       DateTime? dueDate,
       Reminder? reminder,
+      required TagList<Tag> tags,
       required SubtaskList<Subtask> subtasks}) {
     return _TaskEntity(
       id: id,
@@ -35,6 +36,7 @@ class _$TaskEntityTearOff {
       startDate: startDate,
       dueDate: dueDate,
       reminder: reminder,
+      tags: tags,
       subtasks: subtasks,
     );
   }
@@ -53,8 +55,8 @@ mixin _$TaskEntity {
   Description? get description => throw _privateConstructorUsedError;
   DateTime? get startDate => throw _privateConstructorUsedError;
   DateTime? get dueDate => throw _privateConstructorUsedError;
-  Reminder? get reminder =>
-      throw _privateConstructorUsedError; //List<Tag> tags,
+  Reminder? get reminder => throw _privateConstructorUsedError;
+  TagList<Tag> get tags => throw _privateConstructorUsedError;
   SubtaskList<Subtask> get subtasks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -76,6 +78,7 @@ abstract class $TaskEntityCopyWith<$Res> {
       DateTime? startDate,
       DateTime? dueDate,
       Reminder? reminder,
+      TagList<Tag> tags,
       SubtaskList<Subtask> subtasks});
 }
 
@@ -97,6 +100,7 @@ class _$TaskEntityCopyWithImpl<$Res> implements $TaskEntityCopyWith<$Res> {
     Object? startDate = freezed,
     Object? dueDate = freezed,
     Object? reminder = freezed,
+    Object? tags = freezed,
     Object? subtasks = freezed,
   }) {
     return _then(_value.copyWith(
@@ -132,6 +136,10 @@ class _$TaskEntityCopyWithImpl<$Res> implements $TaskEntityCopyWith<$Res> {
           ? _value.reminder
           : reminder // ignore: cast_nullable_to_non_nullable
               as Reminder?,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as TagList<Tag>,
       subtasks: subtasks == freezed
           ? _value.subtasks
           : subtasks // ignore: cast_nullable_to_non_nullable
@@ -155,6 +163,7 @@ abstract class _$TaskEntityCopyWith<$Res> implements $TaskEntityCopyWith<$Res> {
       DateTime? startDate,
       DateTime? dueDate,
       Reminder? reminder,
+      TagList<Tag> tags,
       SubtaskList<Subtask> subtasks});
 }
 
@@ -178,6 +187,7 @@ class __$TaskEntityCopyWithImpl<$Res> extends _$TaskEntityCopyWithImpl<$Res>
     Object? startDate = freezed,
     Object? dueDate = freezed,
     Object? reminder = freezed,
+    Object? tags = freezed,
     Object? subtasks = freezed,
   }) {
     return _then(_TaskEntity(
@@ -213,6 +223,10 @@ class __$TaskEntityCopyWithImpl<$Res> extends _$TaskEntityCopyWithImpl<$Res>
           ? _value.reminder
           : reminder // ignore: cast_nullable_to_non_nullable
               as Reminder?,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as TagList<Tag>,
       subtasks: subtasks == freezed
           ? _value.subtasks
           : subtasks // ignore: cast_nullable_to_non_nullable
@@ -233,6 +247,7 @@ class _$_TaskEntity extends _TaskEntity {
       this.startDate,
       this.dueDate,
       this.reminder,
+      required this.tags,
       required this.subtasks})
       : super._();
 
@@ -254,12 +269,14 @@ class _$_TaskEntity extends _TaskEntity {
   final DateTime? dueDate;
   @override
   final Reminder? reminder;
-  @override //List<Tag> tags,
+  @override
+  final TagList<Tag> tags;
+  @override
   final SubtaskList<Subtask> subtasks;
 
   @override
   String toString() {
-    return 'TaskEntity(id: $id, title: $title, isDone: $isDone, priority: $priority, description: $description, startDate: $startDate, dueDate: $dueDate, reminder: $reminder, subtasks: $subtasks)';
+    return 'TaskEntity(id: $id, title: $title, isDone: $isDone, priority: $priority, description: $description, startDate: $startDate, dueDate: $dueDate, reminder: $reminder, tags: $tags, subtasks: $subtasks)';
   }
 
   @override
@@ -287,6 +304,8 @@ class _$_TaskEntity extends _TaskEntity {
             (identical(other.reminder, reminder) ||
                 const DeepCollectionEquality()
                     .equals(other.reminder, reminder)) &&
+            (identical(other.tags, tags) ||
+                const DeepCollectionEquality().equals(other.tags, tags)) &&
             (identical(other.subtasks, subtasks) ||
                 const DeepCollectionEquality()
                     .equals(other.subtasks, subtasks)));
@@ -303,6 +322,7 @@ class _$_TaskEntity extends _TaskEntity {
       const DeepCollectionEquality().hash(startDate) ^
       const DeepCollectionEquality().hash(dueDate) ^
       const DeepCollectionEquality().hash(reminder) ^
+      const DeepCollectionEquality().hash(tags) ^
       const DeepCollectionEquality().hash(subtasks);
 
   @JsonKey(ignore: true)
@@ -321,6 +341,7 @@ abstract class _TaskEntity extends TaskEntity {
       DateTime? startDate,
       DateTime? dueDate,
       Reminder? reminder,
+      required TagList<Tag> tags,
       required SubtaskList<Subtask> subtasks}) = _$_TaskEntity;
   const _TaskEntity._() : super._();
 
@@ -340,7 +361,9 @@ abstract class _TaskEntity extends TaskEntity {
   DateTime? get dueDate => throw _privateConstructorUsedError;
   @override
   Reminder? get reminder => throw _privateConstructorUsedError;
-  @override //List<Tag> tags,
+  @override
+  TagList<Tag> get tags => throw _privateConstructorUsedError;
+  @override
   SubtaskList<Subtask> get subtasks => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
