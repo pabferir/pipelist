@@ -13,9 +13,9 @@ abstract class Task implements _$Task {
   const Task._();
 
   const factory Task({
-    required UniqueId? id,
+    @required UniqueId? id,
     //@Default("InboxUuid") UniqueId listId,
-    required TaskTitle? title,
+    @required TaskTitle? title,
     @Default(false) bool isDone,
     @Default(0) Priority priority,
     Description? description,
@@ -32,16 +32,19 @@ abstract class Task implements _$Task {
   Option<ValueFailure<dynamic>> get failureOption {
     return title!.failureOrUnit
         .andThen(priority.failureOrUnit)
+        .andThen(description!.failureOrUnit)
         .andThen(subtasks.failureOrUnit)
-        // Unable to perform map function with null-safety
-        // .andThen(
-        //   subtasks
-        //       .getOrCrash()
-        //       .map((subtask) => subtask.failureOption)
-        //       .filter((o) => o.isSome())
-        //       .getOrElse(0, (_) => none())
-        //       .fold(() => right(unit), (f) => left(f)),
-        // )
+        .andThen(reminder!.failureOrUnit)
+        .andThen(
+          subtasks
+              .getOrCrash()
+              .map((subtask) => subtask.failureOption)
+              .filter((o) => o.isSome())
+              .getOrElse(0, (_) => none())
+              .fold(() => right(unit), (f) => left(f)),
+        )
         .fold((f) => some(f), (_) => none());
   }
+
+  get serverTimestamp => null;
 }

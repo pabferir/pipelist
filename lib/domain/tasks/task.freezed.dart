@@ -17,8 +17,8 @@ class _$TaskTearOff {
   const _$TaskTearOff();
 
   _Task call(
-      {required UniqueId? id,
-      required TaskTitle? title,
+      {UniqueId? id,
+      TaskTitle? title,
       bool isDone = false,
       Priority priority = 0,
       Description? description,
@@ -221,8 +221,8 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
 class _$_Task extends _Task {
   const _$_Task(
-      {required this.id,
-      required this.title,
+      {this.id,
+      this.title,
       this.isDone = false,
       this.priority = 0,
       this.description,
@@ -309,8 +309,8 @@ class _$_Task extends _Task {
 
 abstract class _Task extends Task {
   const factory _Task(
-      {required UniqueId? id,
-      required TaskTitle? title,
+      {UniqueId? id,
+      TaskTitle? title,
       bool isDone,
       Priority priority,
       Description? description,

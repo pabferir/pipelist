@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SubtaskTearOff {
   const _$SubtaskTearOff();
 
-  _Subtask call(
-      {required UniqueId? id, required TaskTitle? title, bool isDone = false}) {
+  _Subtask call({UniqueId? id, TaskTitle? title, bool isDone = false}) {
     return _Subtask(
       id: id,
       title: title,
@@ -120,8 +119,7 @@ class __$SubtaskCopyWithImpl<$Res> extends _$SubtaskCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Subtask extends _Subtask {
-  const _$_Subtask({required this.id, required this.title, this.isDone = false})
-      : super._();
+  const _$_Subtask({this.id, this.title, this.isDone = false}) : super._();
 
   @override
   final UniqueId? id;
@@ -162,10 +160,8 @@ class _$_Subtask extends _Subtask {
 }
 
 abstract class _Subtask extends Subtask {
-  const factory _Subtask(
-      {required UniqueId? id,
-      required TaskTitle? title,
-      bool isDone}) = _$_Subtask;
+  const factory _Subtask({UniqueId? id, TaskTitle? title, bool isDone}) =
+      _$_Subtask;
   const _Subtask._() : super._();
 
   @override

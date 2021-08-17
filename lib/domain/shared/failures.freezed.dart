@@ -16,20 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ValueFailureTearOff {
   const _$ValueFailureTearOff();
 
-  EmptyField<T> emptyField<T>({required T? failedValue}) {
+  EmptyField<T> emptyField<T>({T? failedValue}) {
     return EmptyField<T>(
       failedValue: failedValue,
     );
   }
 
-  MultilineField<T> multilineField<T>({required T? failedValue}) {
+  MultilineField<T> multilineField<T>({T? failedValue}) {
     return MultilineField<T>(
       failedValue: failedValue,
     );
   }
 
-  ExceedingLength<T> exceedingLength<T>(
-      {required T? failedValue, required int maxLength}) {
+  ExceedingLength<T> exceedingLength<T>({T? failedValue, int? maxLength}) {
     return ExceedingLength<T>(
       failedValue: failedValue,
       maxLength: maxLength,
@@ -37,20 +36,20 @@ class _$ValueFailureTearOff {
   }
 
   ExceedingListLength<T> exceedingListLength<T>(
-      {required T? failedValue, required int maxLength}) {
+      {T? failedValue, int? maxLength}) {
     return ExceedingListLength<T>(
       failedValue: failedValue,
       maxLength: maxLength,
     );
   }
 
-  DateAlreadyPassed<T> dateAlreadyPassed<T>({required T? failedValue}) {
+  DateAlreadyPassed<T> dateAlreadyPassed<T>({T? failedValue}) {
     return DateAlreadyPassed<T>(
       failedValue: failedValue,
     );
   }
 
-  PriorityOutOfRange<T> priorityOutOfRange<T>({required T? failedValue}) {
+  PriorityOutOfRange<T> priorityOutOfRange<T>({T? failedValue}) {
     return PriorityOutOfRange<T>(
       failedValue: failedValue,
     );
@@ -68,8 +67,8 @@ mixin _$ValueFailure<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T? failedValue) emptyField,
     required TResult Function(T? failedValue) multilineField,
-    required TResult Function(T? failedValue, int maxLength) exceedingLength,
-    required TResult Function(T? failedValue, int maxLength)
+    required TResult Function(T? failedValue, int? maxLength) exceedingLength,
+    required TResult Function(T? failedValue, int? maxLength)
         exceedingListLength,
     required TResult Function(T? failedValue) dateAlreadyPassed,
     required TResult Function(T? failedValue) priorityOutOfRange,
@@ -79,8 +78,8 @@ mixin _$ValueFailure<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? failedValue)? emptyField,
     TResult Function(T? failedValue)? multilineField,
-    TResult Function(T? failedValue, int maxLength)? exceedingLength,
-    TResult Function(T? failedValue, int maxLength)? exceedingListLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingListLength,
     TResult Function(T? failedValue)? dateAlreadyPassed,
     TResult Function(T? failedValue)? priorityOutOfRange,
     required TResult orElse(),
@@ -180,7 +179,7 @@ class _$EmptyFieldCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$EmptyField<T> implements EmptyField<T> {
-  const _$EmptyField({required this.failedValue});
+  const _$EmptyField({this.failedValue});
 
   @override
   final T? failedValue;
@@ -213,8 +212,8 @@ class _$EmptyField<T> implements EmptyField<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T? failedValue) emptyField,
     required TResult Function(T? failedValue) multilineField,
-    required TResult Function(T? failedValue, int maxLength) exceedingLength,
-    required TResult Function(T? failedValue, int maxLength)
+    required TResult Function(T? failedValue, int? maxLength) exceedingLength,
+    required TResult Function(T? failedValue, int? maxLength)
         exceedingListLength,
     required TResult Function(T? failedValue) dateAlreadyPassed,
     required TResult Function(T? failedValue) priorityOutOfRange,
@@ -227,8 +226,8 @@ class _$EmptyField<T> implements EmptyField<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? failedValue)? emptyField,
     TResult Function(T? failedValue)? multilineField,
-    TResult Function(T? failedValue, int maxLength)? exceedingLength,
-    TResult Function(T? failedValue, int maxLength)? exceedingListLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingListLength,
     TResult Function(T? failedValue)? dateAlreadyPassed,
     TResult Function(T? failedValue)? priorityOutOfRange,
     required TResult orElse(),
@@ -271,7 +270,7 @@ class _$EmptyField<T> implements EmptyField<T> {
 }
 
 abstract class EmptyField<T> implements ValueFailure<T> {
-  const factory EmptyField({required T? failedValue}) = _$EmptyField<T>;
+  const factory EmptyField({T? failedValue}) = _$EmptyField<T>;
 
   @override
   T? get failedValue => throw _privateConstructorUsedError;
@@ -318,7 +317,7 @@ class _$MultilineFieldCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$MultilineField<T> implements MultilineField<T> {
-  const _$MultilineField({required this.failedValue});
+  const _$MultilineField({this.failedValue});
 
   @override
   final T? failedValue;
@@ -351,8 +350,8 @@ class _$MultilineField<T> implements MultilineField<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T? failedValue) emptyField,
     required TResult Function(T? failedValue) multilineField,
-    required TResult Function(T? failedValue, int maxLength) exceedingLength,
-    required TResult Function(T? failedValue, int maxLength)
+    required TResult Function(T? failedValue, int? maxLength) exceedingLength,
+    required TResult Function(T? failedValue, int? maxLength)
         exceedingListLength,
     required TResult Function(T? failedValue) dateAlreadyPassed,
     required TResult Function(T? failedValue) priorityOutOfRange,
@@ -365,8 +364,8 @@ class _$MultilineField<T> implements MultilineField<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? failedValue)? emptyField,
     TResult Function(T? failedValue)? multilineField,
-    TResult Function(T? failedValue, int maxLength)? exceedingLength,
-    TResult Function(T? failedValue, int maxLength)? exceedingListLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingListLength,
     TResult Function(T? failedValue)? dateAlreadyPassed,
     TResult Function(T? failedValue)? priorityOutOfRange,
     required TResult orElse(),
@@ -409,7 +408,7 @@ class _$MultilineField<T> implements MultilineField<T> {
 }
 
 abstract class MultilineField<T> implements ValueFailure<T> {
-  const factory MultilineField({required T? failedValue}) = _$MultilineField<T>;
+  const factory MultilineField({T? failedValue}) = _$MultilineField<T>;
 
   @override
   T? get failedValue => throw _privateConstructorUsedError;
@@ -426,7 +425,7 @@ abstract class $ExceedingLengthCopyWith<T, $Res>
           ExceedingLength<T> value, $Res Function(ExceedingLength<T>) then) =
       _$ExceedingLengthCopyWithImpl<T, $Res>;
   @override
-  $Res call({T? failedValue, int maxLength});
+  $Res call({T? failedValue, int? maxLength});
 }
 
 /// @nodoc
@@ -453,7 +452,7 @@ class _$ExceedingLengthCopyWithImpl<T, $Res>
       maxLength: maxLength == freezed
           ? _value.maxLength
           : maxLength // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -461,12 +460,12 @@ class _$ExceedingLengthCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$ExceedingLength<T> implements ExceedingLength<T> {
-  const _$ExceedingLength({required this.failedValue, required this.maxLength});
+  const _$ExceedingLength({this.failedValue, this.maxLength});
 
   @override
   final T? failedValue;
   @override
-  final int maxLength;
+  final int? maxLength;
 
   @override
   String toString() {
@@ -501,8 +500,8 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T? failedValue) emptyField,
     required TResult Function(T? failedValue) multilineField,
-    required TResult Function(T? failedValue, int maxLength) exceedingLength,
-    required TResult Function(T? failedValue, int maxLength)
+    required TResult Function(T? failedValue, int? maxLength) exceedingLength,
+    required TResult Function(T? failedValue, int? maxLength)
         exceedingListLength,
     required TResult Function(T? failedValue) dateAlreadyPassed,
     required TResult Function(T? failedValue) priorityOutOfRange,
@@ -515,8 +514,8 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? failedValue)? emptyField,
     TResult Function(T? failedValue)? multilineField,
-    TResult Function(T? failedValue, int maxLength)? exceedingLength,
-    TResult Function(T? failedValue, int maxLength)? exceedingListLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingListLength,
     TResult Function(T? failedValue)? dateAlreadyPassed,
     TResult Function(T? failedValue)? priorityOutOfRange,
     required TResult orElse(),
@@ -559,12 +558,12 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
 }
 
 abstract class ExceedingLength<T> implements ValueFailure<T> {
-  const factory ExceedingLength(
-      {required T? failedValue, required int maxLength}) = _$ExceedingLength<T>;
+  const factory ExceedingLength({T? failedValue, int? maxLength}) =
+      _$ExceedingLength<T>;
 
   @override
   T? get failedValue => throw _privateConstructorUsedError;
-  int get maxLength => throw _privateConstructorUsedError;
+  int? get maxLength => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $ExceedingLengthCopyWith<T, ExceedingLength<T>> get copyWith =>
@@ -578,7 +577,7 @@ abstract class $ExceedingListLengthCopyWith<T, $Res>
           $Res Function(ExceedingListLength<T>) then) =
       _$ExceedingListLengthCopyWithImpl<T, $Res>;
   @override
-  $Res call({T? failedValue, int maxLength});
+  $Res call({T? failedValue, int? maxLength});
 }
 
 /// @nodoc
@@ -605,7 +604,7 @@ class _$ExceedingListLengthCopyWithImpl<T, $Res>
       maxLength: maxLength == freezed
           ? _value.maxLength
           : maxLength // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -613,13 +612,12 @@ class _$ExceedingListLengthCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$ExceedingListLength<T> implements ExceedingListLength<T> {
-  const _$ExceedingListLength(
-      {required this.failedValue, required this.maxLength});
+  const _$ExceedingListLength({this.failedValue, this.maxLength});
 
   @override
   final T? failedValue;
   @override
-  final int maxLength;
+  final int? maxLength;
 
   @override
   String toString() {
@@ -655,8 +653,8 @@ class _$ExceedingListLength<T> implements ExceedingListLength<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T? failedValue) emptyField,
     required TResult Function(T? failedValue) multilineField,
-    required TResult Function(T? failedValue, int maxLength) exceedingLength,
-    required TResult Function(T? failedValue, int maxLength)
+    required TResult Function(T? failedValue, int? maxLength) exceedingLength,
+    required TResult Function(T? failedValue, int? maxLength)
         exceedingListLength,
     required TResult Function(T? failedValue) dateAlreadyPassed,
     required TResult Function(T? failedValue) priorityOutOfRange,
@@ -669,8 +667,8 @@ class _$ExceedingListLength<T> implements ExceedingListLength<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? failedValue)? emptyField,
     TResult Function(T? failedValue)? multilineField,
-    TResult Function(T? failedValue, int maxLength)? exceedingLength,
-    TResult Function(T? failedValue, int maxLength)? exceedingListLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingListLength,
     TResult Function(T? failedValue)? dateAlreadyPassed,
     TResult Function(T? failedValue)? priorityOutOfRange,
     required TResult orElse(),
@@ -713,13 +711,12 @@ class _$ExceedingListLength<T> implements ExceedingListLength<T> {
 }
 
 abstract class ExceedingListLength<T> implements ValueFailure<T> {
-  const factory ExceedingListLength(
-      {required T? failedValue,
-      required int maxLength}) = _$ExceedingListLength<T>;
+  const factory ExceedingListLength({T? failedValue, int? maxLength}) =
+      _$ExceedingListLength<T>;
 
   @override
   T? get failedValue => throw _privateConstructorUsedError;
-  int get maxLength => throw _privateConstructorUsedError;
+  int? get maxLength => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $ExceedingListLengthCopyWith<T, ExceedingListLength<T>> get copyWith =>
@@ -763,7 +760,7 @@ class _$DateAlreadyPassedCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$DateAlreadyPassed<T> implements DateAlreadyPassed<T> {
-  const _$DateAlreadyPassed({required this.failedValue});
+  const _$DateAlreadyPassed({this.failedValue});
 
   @override
   final T? failedValue;
@@ -797,8 +794,8 @@ class _$DateAlreadyPassed<T> implements DateAlreadyPassed<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T? failedValue) emptyField,
     required TResult Function(T? failedValue) multilineField,
-    required TResult Function(T? failedValue, int maxLength) exceedingLength,
-    required TResult Function(T? failedValue, int maxLength)
+    required TResult Function(T? failedValue, int? maxLength) exceedingLength,
+    required TResult Function(T? failedValue, int? maxLength)
         exceedingListLength,
     required TResult Function(T? failedValue) dateAlreadyPassed,
     required TResult Function(T? failedValue) priorityOutOfRange,
@@ -811,8 +808,8 @@ class _$DateAlreadyPassed<T> implements DateAlreadyPassed<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? failedValue)? emptyField,
     TResult Function(T? failedValue)? multilineField,
-    TResult Function(T? failedValue, int maxLength)? exceedingLength,
-    TResult Function(T? failedValue, int maxLength)? exceedingListLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingListLength,
     TResult Function(T? failedValue)? dateAlreadyPassed,
     TResult Function(T? failedValue)? priorityOutOfRange,
     required TResult orElse(),
@@ -855,8 +852,7 @@ class _$DateAlreadyPassed<T> implements DateAlreadyPassed<T> {
 }
 
 abstract class DateAlreadyPassed<T> implements ValueFailure<T> {
-  const factory DateAlreadyPassed({required T? failedValue}) =
-      _$DateAlreadyPassed<T>;
+  const factory DateAlreadyPassed({T? failedValue}) = _$DateAlreadyPassed<T>;
 
   @override
   T? get failedValue => throw _privateConstructorUsedError;
@@ -903,7 +899,7 @@ class _$PriorityOutOfRangeCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$PriorityOutOfRange<T> implements PriorityOutOfRange<T> {
-  const _$PriorityOutOfRange({required this.failedValue});
+  const _$PriorityOutOfRange({this.failedValue});
 
   @override
   final T? failedValue;
@@ -937,8 +933,8 @@ class _$PriorityOutOfRange<T> implements PriorityOutOfRange<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T? failedValue) emptyField,
     required TResult Function(T? failedValue) multilineField,
-    required TResult Function(T? failedValue, int maxLength) exceedingLength,
-    required TResult Function(T? failedValue, int maxLength)
+    required TResult Function(T? failedValue, int? maxLength) exceedingLength,
+    required TResult Function(T? failedValue, int? maxLength)
         exceedingListLength,
     required TResult Function(T? failedValue) dateAlreadyPassed,
     required TResult Function(T? failedValue) priorityOutOfRange,
@@ -951,8 +947,8 @@ class _$PriorityOutOfRange<T> implements PriorityOutOfRange<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T? failedValue)? emptyField,
     TResult Function(T? failedValue)? multilineField,
-    TResult Function(T? failedValue, int maxLength)? exceedingLength,
-    TResult Function(T? failedValue, int maxLength)? exceedingListLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingLength,
+    TResult Function(T? failedValue, int? maxLength)? exceedingListLength,
     TResult Function(T? failedValue)? dateAlreadyPassed,
     TResult Function(T? failedValue)? priorityOutOfRange,
     required TResult orElse(),
@@ -995,8 +991,7 @@ class _$PriorityOutOfRange<T> implements PriorityOutOfRange<T> {
 }
 
 abstract class PriorityOutOfRange<T> implements ValueFailure<T> {
-  const factory PriorityOutOfRange({required T? failedValue}) =
-      _$PriorityOutOfRange<T>;
+  const factory PriorityOutOfRange({T? failedValue}) = _$PriorityOutOfRange<T>;
 
   @override
   T? get failedValue => throw _privateConstructorUsedError;

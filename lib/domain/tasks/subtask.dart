@@ -11,8 +11,8 @@ abstract class Subtask implements _$Subtask {
   const Subtask._();
 
   const factory Subtask({
-    required UniqueId? id,
-    required TaskTitle? title,
+    @required UniqueId? id,
+    @required TaskTitle? title,
     @Default(false) bool isDone,
   }) = _Subtask;
 

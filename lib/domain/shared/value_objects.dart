@@ -11,8 +11,7 @@ abstract class ValueObject<T> {
   Either<ValueFailure<T>, T> get value;
 
   /// Throws [UnexpectedValueError] containing the [ValueFailure]
-  T? getOrCrash() {
-    // id = identity - same as writing (right) => right
+  T getOrCrash() {
     return value.fold((f) => throw UnexpectedValueError(f), id);
   }
 
@@ -44,11 +43,11 @@ class UniqueId extends ValueObject<String> {
     );
   }
 
-  factory UniqueId.fromUniqueString(String input) {
+  /// Used with strings we trust are unique, such as database IDs.
+  factory UniqueId.fromUniqueString(String uniqueIdStr) {
     return UniqueId._(
-      right(input),
+      right(uniqueIdStr),
     );
   }
-
   const UniqueId._(this.value);
 }
