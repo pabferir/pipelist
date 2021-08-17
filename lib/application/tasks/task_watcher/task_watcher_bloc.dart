@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart' as dartz;
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
@@ -16,7 +16,7 @@ part 'task_watcher_bloc.freezed.dart';
 @injectable
 class TaskWatcherBloc extends Bloc<TaskWatcherEvent, TaskWatcherState> {
   final ITaskRepository _taskRepository;
-  StreamSubscription<dartz.Either<TaskFailure, KtList<Task>>>
+  StreamSubscription<Either<TaskFailure, KtList<TaskEntity>>>
       _taskStreamSubscription;
 
   TaskWatcherBloc(
@@ -51,7 +51,7 @@ class TaskWatcherBloc extends Bloc<TaskWatcherEvent, TaskWatcherState> {
         yield e.failureOrTasks.fold(
           (f) => TaskWatcherState.loadFailure(f),
           (tasks) => TaskWatcherState.loadSuccess(tasks),
-        ) as TaskWatcherState;
+        );
       },
     );
   }

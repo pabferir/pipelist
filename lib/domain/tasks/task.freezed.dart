@@ -13,10 +13,10 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$TaskTearOff {
-  const _$TaskTearOff();
+class _$TaskEntityTearOff {
+  const _$TaskEntityTearOff();
 
-  _Task call(
+  _TaskEntity call(
       {UniqueId? id,
       TaskTitle? title,
       bool isDone = false,
@@ -26,7 +26,7 @@ class _$TaskTearOff {
       DateTime? dueDate,
       Reminder? reminder,
       required SubtaskList<Subtask> subtasks}) {
-    return _Task(
+    return _TaskEntity(
       id: id,
       title: title,
       isDone: isDone,
@@ -41,10 +41,10 @@ class _$TaskTearOff {
 }
 
 /// @nodoc
-const $Task = _$TaskTearOff();
+const $TaskEntity = _$TaskEntityTearOff();
 
 /// @nodoc
-mixin _$Task {
+mixin _$TaskEntity {
   UniqueId? get id =>
       throw _privateConstructorUsedError; //@Default("InboxUuid") UniqueId listId,
   TaskTitle? get title => throw _privateConstructorUsedError;
@@ -58,13 +58,15 @@ mixin _$Task {
   SubtaskList<Subtask> get subtasks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
+  $TaskEntityCopyWith<TaskEntity> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TaskCopyWith<$Res> {
-  factory $TaskCopyWith(Task value, $Res Function(Task) then) =
-      _$TaskCopyWithImpl<$Res>;
+abstract class $TaskEntityCopyWith<$Res> {
+  factory $TaskEntityCopyWith(
+          TaskEntity value, $Res Function(TaskEntity) then) =
+      _$TaskEntityCopyWithImpl<$Res>;
   $Res call(
       {UniqueId? id,
       TaskTitle? title,
@@ -78,12 +80,12 @@ abstract class $TaskCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
-  _$TaskCopyWithImpl(this._value, this._then);
+class _$TaskEntityCopyWithImpl<$Res> implements $TaskEntityCopyWith<$Res> {
+  _$TaskEntityCopyWithImpl(this._value, this._then);
 
-  final Task _value;
+  final TaskEntity _value;
   // ignore: unused_field
-  final $Res Function(Task) _then;
+  final $Res Function(TaskEntity) _then;
 
   @override
   $Res call({
@@ -139,9 +141,10 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
-  factory _$TaskCopyWith(_Task value, $Res Function(_Task) then) =
-      __$TaskCopyWithImpl<$Res>;
+abstract class _$TaskEntityCopyWith<$Res> implements $TaskEntityCopyWith<$Res> {
+  factory _$TaskEntityCopyWith(
+          _TaskEntity value, $Res Function(_TaskEntity) then) =
+      __$TaskEntityCopyWithImpl<$Res>;
   @override
   $Res call(
       {UniqueId? id,
@@ -156,13 +159,14 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
-    implements _$TaskCopyWith<$Res> {
-  __$TaskCopyWithImpl(_Task _value, $Res Function(_Task) _then)
-      : super(_value, (v) => _then(v as _Task));
+class __$TaskEntityCopyWithImpl<$Res> extends _$TaskEntityCopyWithImpl<$Res>
+    implements _$TaskEntityCopyWith<$Res> {
+  __$TaskEntityCopyWithImpl(
+      _TaskEntity _value, $Res Function(_TaskEntity) _then)
+      : super(_value, (v) => _then(v as _TaskEntity));
 
   @override
-  _Task get _value => super._value as _Task;
+  _TaskEntity get _value => super._value as _TaskEntity;
 
   @override
   $Res call({
@@ -176,7 +180,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
     Object? reminder = freezed,
     Object? subtasks = freezed,
   }) {
-    return _then(_Task(
+    return _then(_TaskEntity(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -219,8 +223,8 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Task extends _Task {
-  const _$_Task(
+class _$_TaskEntity extends _TaskEntity {
+  const _$_TaskEntity(
       {this.id,
       this.title,
       this.isDone = false,
@@ -255,13 +259,13 @@ class _$_Task extends _Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, isDone: $isDone, priority: $priority, description: $description, startDate: $startDate, dueDate: $dueDate, reminder: $reminder, subtasks: $subtasks)';
+    return 'TaskEntity(id: $id, title: $title, isDone: $isDone, priority: $priority, description: $description, startDate: $startDate, dueDate: $dueDate, reminder: $reminder, subtasks: $subtasks)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Task &&
+        (other is _TaskEntity &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
@@ -303,12 +307,12 @@ class _$_Task extends _Task {
 
   @JsonKey(ignore: true)
   @override
-  _$TaskCopyWith<_Task> get copyWith =>
-      __$TaskCopyWithImpl<_Task>(this, _$identity);
+  _$TaskEntityCopyWith<_TaskEntity> get copyWith =>
+      __$TaskEntityCopyWithImpl<_TaskEntity>(this, _$identity);
 }
 
-abstract class _Task extends Task {
-  const factory _Task(
+abstract class _TaskEntity extends TaskEntity {
+  const factory _TaskEntity(
       {UniqueId? id,
       TaskTitle? title,
       bool isDone,
@@ -317,8 +321,8 @@ abstract class _Task extends Task {
       DateTime? startDate,
       DateTime? dueDate,
       Reminder? reminder,
-      required SubtaskList<Subtask> subtasks}) = _$_Task;
-  const _Task._() : super._();
+      required SubtaskList<Subtask> subtasks}) = _$_TaskEntity;
+  const _TaskEntity._() : super._();
 
   @override
   UniqueId? get id => throw _privateConstructorUsedError;
@@ -340,5 +344,6 @@ abstract class _Task extends Task {
   SubtaskList<Subtask> get subtasks => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$TaskCopyWith<_Task> get copyWith => throw _privateConstructorUsedError;
+  _$TaskEntityCopyWith<_TaskEntity> get copyWith =>
+      throw _privateConstructorUsedError;
 }

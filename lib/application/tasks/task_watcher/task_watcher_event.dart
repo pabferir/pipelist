@@ -6,5 +6,5 @@ abstract class TaskWatcherEvent with _$TaskWatcherEvent {
   const factory TaskWatcherEvent.watchUncompletedStarted() =
       _WatchUncompletedStarted;
   const factory TaskWatcherEvent.tasksReceived(
-      dartz.Either<TaskFailure, KtList<Task>> failureOrTasks) = _TasksReceived;
+      Either<TaskFailure, KtList<TaskEntity>> failureOrTasks) = _TasksReceived;
 }

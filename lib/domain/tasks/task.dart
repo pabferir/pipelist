@@ -9,10 +9,10 @@ import 'package:pipelist/domain/tasks/value_objects.dart';
 part 'task.freezed.dart';
 
 @freezed
-abstract class Task implements _$Task {
-  const Task._();
+abstract class TaskEntity implements _$TaskEntity {
+  const TaskEntity._();
 
-  const factory Task({
+  const factory TaskEntity({
     @required UniqueId? id,
     //@Default("InboxUuid") UniqueId listId,
     @required TaskTitle? title,
@@ -24,9 +24,9 @@ abstract class Task implements _$Task {
     Reminder? reminder,
     //List<Tag> tags,
     required SubtaskList<Subtask> subtasks,
-  }) = _Task;
+  }) = _TaskEntity;
 
-  factory Task.empty() => Task(
+  factory TaskEntity.empty() => TaskEntity(
       id: UniqueId(), title: TaskTitle(''), subtasks: SubtaskList(emptyList()));
 
   Option<ValueFailure<dynamic>> get failureOption {

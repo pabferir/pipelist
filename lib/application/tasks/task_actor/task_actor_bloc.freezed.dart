@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$TaskActorEventTearOff {
   const _$TaskActorEventTearOff();
 
-  _Deleted deleted(Task task) {
+  _Deleted deleted(TaskEntity task) {
     return _Deleted(
       task,
     );
@@ -28,16 +28,16 @@ const $TaskActorEvent = _$TaskActorEventTearOff();
 
 /// @nodoc
 mixin _$TaskActorEvent {
-  Task get task => throw _privateConstructorUsedError;
+  TaskEntity get task => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Task task) deleted,
+    required TResult Function(TaskEntity task) deleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Task task)? deleted,
+    TResult Function(TaskEntity task)? deleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,9 +63,9 @@ abstract class $TaskActorEventCopyWith<$Res> {
   factory $TaskActorEventCopyWith(
           TaskActorEvent value, $Res Function(TaskActorEvent) then) =
       _$TaskActorEventCopyWithImpl<$Res>;
-  $Res call({Task task});
+  $Res call({TaskEntity task});
 
-  $TaskCopyWith<$Res> get task;
+  $TaskEntityCopyWith<$Res> get task;
 }
 
 /// @nodoc
@@ -85,13 +85,13 @@ class _$TaskActorEventCopyWithImpl<$Res>
       task: task == freezed
           ? _value.task
           : task // ignore: cast_nullable_to_non_nullable
-              as Task,
+              as TaskEntity,
     ));
   }
 
   @override
-  $TaskCopyWith<$Res> get task {
-    return $TaskCopyWith<$Res>(_value.task, (value) {
+  $TaskEntityCopyWith<$Res> get task {
+    return $TaskEntityCopyWith<$Res>(_value.task, (value) {
       return _then(_value.copyWith(task: value));
     });
   }
@@ -103,10 +103,10 @@ abstract class _$DeletedCopyWith<$Res>
   factory _$DeletedCopyWith(_Deleted value, $Res Function(_Deleted) then) =
       __$DeletedCopyWithImpl<$Res>;
   @override
-  $Res call({Task task});
+  $Res call({TaskEntity task});
 
   @override
-  $TaskCopyWith<$Res> get task;
+  $TaskEntityCopyWith<$Res> get task;
 }
 
 /// @nodoc
@@ -126,7 +126,7 @@ class __$DeletedCopyWithImpl<$Res> extends _$TaskActorEventCopyWithImpl<$Res>
       task == freezed
           ? _value.task
           : task // ignore: cast_nullable_to_non_nullable
-              as Task,
+              as TaskEntity,
     ));
   }
 }
@@ -137,7 +137,7 @@ class _$_Deleted implements _Deleted {
   const _$_Deleted(this.task);
 
   @override
-  final Task task;
+  final TaskEntity task;
 
   @override
   String toString() {
@@ -164,7 +164,7 @@ class _$_Deleted implements _Deleted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Task task) deleted,
+    required TResult Function(TaskEntity task) deleted,
   }) {
     return deleted(task);
   }
@@ -172,7 +172,7 @@ class _$_Deleted implements _Deleted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Task task)? deleted,
+    TResult Function(TaskEntity task)? deleted,
     required TResult orElse(),
   }) {
     if (deleted != null) {
@@ -203,10 +203,10 @@ class _$_Deleted implements _Deleted {
 }
 
 abstract class _Deleted implements TaskActorEvent {
-  const factory _Deleted(Task task) = _$_Deleted;
+  const factory _Deleted(TaskEntity task) = _$_Deleted;
 
   @override
-  Task get task => throw _privateConstructorUsedError;
+  TaskEntity get task => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DeletedCopyWith<_Deleted> get copyWith =>

@@ -25,7 +25,7 @@ class _$TaskWatcherEventTearOff {
   }
 
   _TasksReceived tasksReceived(
-      Either<TaskFailure, KtList<Task>> failureOrTasks) {
+      Either<TaskFailure, KtList<TaskEntity>> failureOrTasks) {
     return _TasksReceived(
       failureOrTasks,
     );
@@ -41,7 +41,8 @@ mixin _$TaskWatcherEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() watchAllStarted,
     required TResult Function() watchUncompletedStarted,
-    required TResult Function(Either<TaskFailure, KtList<Task>> failureOrTasks)
+    required TResult Function(
+            Either<TaskFailure, KtList<TaskEntity>> failureOrTasks)
         tasksReceived,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,7 +50,7 @@ mixin _$TaskWatcherEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function()? watchUncompletedStarted,
-    TResult Function(Either<TaskFailure, KtList<Task>> failureOrTasks)?
+    TResult Function(Either<TaskFailure, KtList<TaskEntity>> failureOrTasks)?
         tasksReceived,
     required TResult orElse(),
   }) =>
@@ -131,7 +132,8 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   TResult when<TResult extends Object?>({
     required TResult Function() watchAllStarted,
     required TResult Function() watchUncompletedStarted,
-    required TResult Function(Either<TaskFailure, KtList<Task>> failureOrTasks)
+    required TResult Function(
+            Either<TaskFailure, KtList<TaskEntity>> failureOrTasks)
         tasksReceived,
   }) {
     return watchAllStarted();
@@ -142,7 +144,7 @@ class _$_WatchAllStarted implements _WatchAllStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function()? watchUncompletedStarted,
-    TResult Function(Either<TaskFailure, KtList<Task>> failureOrTasks)?
+    TResult Function(Either<TaskFailure, KtList<TaskEntity>> failureOrTasks)?
         tasksReceived,
     required TResult orElse(),
   }) {
@@ -225,7 +227,8 @@ class _$_WatchUncompletedStarted implements _WatchUncompletedStarted {
   TResult when<TResult extends Object?>({
     required TResult Function() watchAllStarted,
     required TResult Function() watchUncompletedStarted,
-    required TResult Function(Either<TaskFailure, KtList<Task>> failureOrTasks)
+    required TResult Function(
+            Either<TaskFailure, KtList<TaskEntity>> failureOrTasks)
         tasksReceived,
   }) {
     return watchUncompletedStarted();
@@ -236,7 +239,7 @@ class _$_WatchUncompletedStarted implements _WatchUncompletedStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function()? watchUncompletedStarted,
-    TResult Function(Either<TaskFailure, KtList<Task>> failureOrTasks)?
+    TResult Function(Either<TaskFailure, KtList<TaskEntity>> failureOrTasks)?
         tasksReceived,
     required TResult orElse(),
   }) {
@@ -281,7 +284,7 @@ abstract class _$TasksReceivedCopyWith<$Res> {
   factory _$TasksReceivedCopyWith(
           _TasksReceived value, $Res Function(_TasksReceived) then) =
       __$TasksReceivedCopyWithImpl<$Res>;
-  $Res call({Either<TaskFailure, KtList<Task>> failureOrTasks});
+  $Res call({Either<TaskFailure, KtList<TaskEntity>> failureOrTasks});
 }
 
 /// @nodoc
@@ -303,7 +306,7 @@ class __$TasksReceivedCopyWithImpl<$Res>
       failureOrTasks == freezed
           ? _value.failureOrTasks
           : failureOrTasks // ignore: cast_nullable_to_non_nullable
-              as Either<TaskFailure, KtList<Task>>,
+              as Either<TaskFailure, KtList<TaskEntity>>,
     ));
   }
 }
@@ -314,7 +317,7 @@ class _$_TasksReceived implements _TasksReceived {
   const _$_TasksReceived(this.failureOrTasks);
 
   @override
-  final Either<TaskFailure, KtList<Task>> failureOrTasks;
+  final Either<TaskFailure, KtList<TaskEntity>> failureOrTasks;
 
   @override
   String toString() {
@@ -345,7 +348,8 @@ class _$_TasksReceived implements _TasksReceived {
   TResult when<TResult extends Object?>({
     required TResult Function() watchAllStarted,
     required TResult Function() watchUncompletedStarted,
-    required TResult Function(Either<TaskFailure, KtList<Task>> failureOrTasks)
+    required TResult Function(
+            Either<TaskFailure, KtList<TaskEntity>> failureOrTasks)
         tasksReceived,
   }) {
     return tasksReceived(failureOrTasks);
@@ -356,7 +360,7 @@ class _$_TasksReceived implements _TasksReceived {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? watchAllStarted,
     TResult Function()? watchUncompletedStarted,
-    TResult Function(Either<TaskFailure, KtList<Task>> failureOrTasks)?
+    TResult Function(Either<TaskFailure, KtList<TaskEntity>> failureOrTasks)?
         tasksReceived,
     required TResult orElse(),
   }) {
@@ -394,9 +398,10 @@ class _$_TasksReceived implements _TasksReceived {
 
 abstract class _TasksReceived implements TaskWatcherEvent {
   const factory _TasksReceived(
-      Either<TaskFailure, KtList<Task>> failureOrTasks) = _$_TasksReceived;
+          Either<TaskFailure, KtList<TaskEntity>> failureOrTasks) =
+      _$_TasksReceived;
 
-  Either<TaskFailure, KtList<Task>> get failureOrTasks =>
+  Either<TaskFailure, KtList<TaskEntity>> get failureOrTasks =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$TasksReceivedCopyWith<_TasksReceived> get copyWith =>
@@ -415,7 +420,7 @@ class _$TaskWatcherStateTearOff {
     return const _LoadInProgress();
   }
 
-  _LoadSuccess loadSuccess(KtList<Task> tasks) {
+  _LoadSuccess loadSuccess(KtList<TaskEntity> tasks) {
     return _LoadSuccess(
       tasks,
     );
@@ -437,7 +442,7 @@ mixin _$TaskWatcherState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Task> tasks) loadSuccess,
+    required TResult Function(KtList<TaskEntity> tasks) loadSuccess,
     required TResult Function(TaskFailure taskFailure) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -445,7 +450,7 @@ mixin _$TaskWatcherState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Task> tasks)? loadSuccess,
+    TResult Function(KtList<TaskEntity> tasks)? loadSuccess,
     TResult Function(TaskFailure taskFailure)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -525,7 +530,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Task> tasks) loadSuccess,
+    required TResult Function(KtList<TaskEntity> tasks) loadSuccess,
     required TResult Function(TaskFailure taskFailure) loadFailure,
   }) {
     return initial();
@@ -536,7 +541,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Task> tasks)? loadSuccess,
+    TResult Function(KtList<TaskEntity> tasks)? loadSuccess,
     TResult Function(TaskFailure taskFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -619,7 +624,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Task> tasks) loadSuccess,
+    required TResult Function(KtList<TaskEntity> tasks) loadSuccess,
     required TResult Function(TaskFailure taskFailure) loadFailure,
   }) {
     return loadInProgress();
@@ -630,7 +635,7 @@ class _$_LoadInProgress implements _LoadInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Task> tasks)? loadSuccess,
+    TResult Function(KtList<TaskEntity> tasks)? loadSuccess,
     TResult Function(TaskFailure taskFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -676,7 +681,7 @@ abstract class _$LoadSuccessCopyWith<$Res> {
   factory _$LoadSuccessCopyWith(
           _LoadSuccess value, $Res Function(_LoadSuccess) then) =
       __$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({KtList<Task> tasks});
+  $Res call({KtList<TaskEntity> tasks});
 }
 
 /// @nodoc
@@ -698,7 +703,7 @@ class __$LoadSuccessCopyWithImpl<$Res>
       tasks == freezed
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
-              as KtList<Task>,
+              as KtList<TaskEntity>,
     ));
   }
 }
@@ -709,7 +714,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   const _$_LoadSuccess(this.tasks);
 
   @override
-  final KtList<Task> tasks;
+  final KtList<TaskEntity> tasks;
 
   @override
   String toString() {
@@ -738,7 +743,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Task> tasks) loadSuccess,
+    required TResult Function(KtList<TaskEntity> tasks) loadSuccess,
     required TResult Function(TaskFailure taskFailure) loadFailure,
   }) {
     return loadSuccess(tasks);
@@ -749,7 +754,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Task> tasks)? loadSuccess,
+    TResult Function(KtList<TaskEntity> tasks)? loadSuccess,
     TResult Function(TaskFailure taskFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -787,9 +792,9 @@ class _$_LoadSuccess implements _LoadSuccess {
 }
 
 abstract class _LoadSuccess implements TaskWatcherState {
-  const factory _LoadSuccess(KtList<Task> tasks) = _$_LoadSuccess;
+  const factory _LoadSuccess(KtList<TaskEntity> tasks) = _$_LoadSuccess;
 
-  KtList<Task> get tasks => throw _privateConstructorUsedError;
+  KtList<TaskEntity> get tasks => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -872,7 +877,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Task> tasks) loadSuccess,
+    required TResult Function(KtList<TaskEntity> tasks) loadSuccess,
     required TResult Function(TaskFailure taskFailure) loadFailure,
   }) {
     return loadFailure(taskFailure);
@@ -883,7 +888,7 @@ class _$_LoadFailure implements _LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Task> tasks)? loadSuccess,
+    TResult Function(KtList<TaskEntity> tasks)? loadSuccess,
     TResult Function(TaskFailure taskFailure)? loadFailure,
     required TResult orElse(),
   }) {

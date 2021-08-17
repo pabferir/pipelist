@@ -28,7 +28,7 @@ abstract class TaskDto implements _$TaskDto {
     @required @ServerTimestampConverter() FieldValue? serverTimestamp,
   }) = _TaskDto;
 
-  factory TaskDto.fromDomain(Task task) {
+  factory TaskDto.fromDomain(TaskEntity task) {
     return TaskDto(
         id: task.id!.getOrCrash(),
         title: task.title!.getOrCrash(),
@@ -45,8 +45,8 @@ abstract class TaskDto implements _$TaskDto {
         serverTimestamp: FieldValue.serverTimestamp());
   }
 
-  Task toDomain() {
-    return Task(
+  TaskEntity toDomain() {
+    return TaskEntity(
         id: UniqueId.fromUniqueString(id!),
         title: TaskTitle(title!),
         subtasks: SubtaskList(
