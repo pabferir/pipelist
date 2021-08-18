@@ -5,7 +5,7 @@ import 'package:uuid/uuid.dart';
 class TaskEntity extends Equatable {
   final Uuid id;
   final String title;
-  final bool isDone;
+  final bool isComplete;
   final int priority;
   final String? description;
   final DateTime? startDate;
