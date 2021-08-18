@@ -1,4 +1,4 @@
-package com.example.pipelist
+package com.pabferir.pipelist
 
 import io.flutter.embedding.android.FlutterActivity
 
