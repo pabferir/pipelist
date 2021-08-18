@@ -34,11 +34,15 @@ abstract class TaskDto implements _$TaskDto {
         id: task.id!.getOrCrash(),
         title: task.title!.getOrCrash(),
         isDone: (task.isDone as ValueObject<bool>).getOrCrash(),
-        priority: task.priority.getOrCrash(),
+        priority: task.priority!.getOrCrash(),
         description: task.description!.getOrCrash(),
         startDate: (task.startDate as ValueObject<DateTime>).getOrCrash(),
         dueDate: (task.dueDate as ValueObject<DateTime>).getOrCrash(),
         reminder: task.reminder!.getOrCrash(),
+        tags: task.tags
+            .getOrCrash()
+            .map((tag) => TagDto.fromDomain(tag))
+            .asList(),
         subtasks: task.subtasks
             .getOrCrash()
             .map((subtask) => SubtaskDto.fromDomain(subtask))
@@ -50,6 +54,11 @@ abstract class TaskDto implements _$TaskDto {
     return TaskEntity(
       id: UniqueId.fromUniqueString(id!),
       title: TaskTitle(title!),
+      priority: Priority(priority!),
+      description: Description(description!),
+      startDate: DateTimeTimestampConverter().fromJson(startDate),
+      dueDate: DateTimeTimestampConverter().fromJson(dueDate),
+      reminder: Reminder(DateTimeTimestampConverter().fromJson(reminder)!),
       tags: TagList(tags!.map((dto) => dto.toDomain()).toImmutableList()),
       subtasks:
           SubtaskList(subtasks!.map((dto) => dto.toDomain()).toImmutableList()),

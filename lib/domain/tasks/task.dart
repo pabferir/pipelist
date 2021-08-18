@@ -17,8 +17,8 @@ abstract class TaskEntity implements _$TaskEntity {
     @required UniqueId? id,
     //@Default("InboxUuid") UniqueId listId,
     @required TaskTitle? title,
-    @Default(false) bool isDone,
-    @Default(0) Priority priority,
+    bool? isDone,
+    Priority? priority,
     Description? description,
     DateTime? startDate,
     DateTime? dueDate,
@@ -30,12 +30,14 @@ abstract class TaskEntity implements _$TaskEntity {
   factory TaskEntity.empty() => TaskEntity(
       id: UniqueId(),
       title: TaskTitle(''),
+      isDone: false,
+      priority: Priority(0),
       tags: TagList(emptyList()),
       subtasks: SubtaskList(emptyList()));
 
   Option<ValueFailure<dynamic>> get failureOption {
     return title!.failureOrUnit
-        .andThen(priority.failureOrUnit)
+        .andThen(priority!.failureOrUnit)
         .andThen(description!.failureOrUnit)
         .andThen(subtasks.failureOrUnit)
         .andThen(reminder!.failureOrUnit)

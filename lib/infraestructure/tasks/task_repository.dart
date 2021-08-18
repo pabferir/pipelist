@@ -1,16 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/src/collection/kt_list.dart';
 import 'package:dartz/dartz.dart';
 import 'package:pipelist/domain/tasks/i_task_repository.dart';
 import 'package:pipelist/domain/tasks/task_failure.dart';
 import 'package:pipelist/domain/tasks/task.dart';
+import 'package:pipelist/infraestructure/shared/firestore_helpers.dart';
+import 'package:pipelist/infraestructure/tasks/task_dtos.dart';
+import 'package:kt_dart/collection.dart';
+import 'package:rxdart/rxdart.dart';
 
 @LazySingleton(as: ITaskRepository)
 class TaskRepository implements ITaskRepository {
   final FirebaseFirestore _firestore;
 
-  TaskRepository(this._firestore);
+  TaskRepository({FirebaseFirestore? firestore})
+      : _firestore = firestore ?? FirebaseFirestore.instance;
 
   @override
   Stream<Either<TaskFailure, KtList<TaskEntity>>> watchAll() async* {
@@ -26,11 +32,19 @@ class TaskRepository implements ITaskRepository {
     //    }
     //  } );
 
-    // final taskDoc = await _firestore.taskDocument();
-    // yield* taskDoc.snapshots().map((snapshot) => right<TaskFailure, KtList<entity.Task>>(
-    //     (snapshot.data()!)
-    //         .map((doc) => TaskDto.fromFirestore(doc).toDomain()).toImmutableList()));
-    throw UnimplementedError();
+    // tasks/{task ID}
+    // final tasksDoc = await _firestore.doc('z5gnTFulEur3f4BmTZbT');
+    final taskCollection = _firestore.taskCollection;
+    yield* taskCollection
+        .orderBy('serverTimestamp', descending: true)
+        .snapshots()
+        .map(
+          (snapshot) => right<TaskFailure, KtList<TaskEntity>>(
+            snapshot.docs
+                .map((doc) => TaskDto.fromFirestore(doc).toDomain())
+                .toImmutableList(),
+          ),
+        );
   }
 
   @override

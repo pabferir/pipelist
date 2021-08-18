@@ -6,6 +6,8 @@ extension FirestoreX on FirebaseFirestore {
   Future<DocumentReference> taskDocument() async {
     return FirebaseFirestore.instance.doc('tasks');
   }
+
+  CollectionReference get taskCollection => collection('tasks');
 }
 
 // extension FirestoreX on FirebaseFirestore {

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pipelist/application/tasks/task_actor/task_actor_bloc.dart';
 import 'package:pipelist/application/tasks/task_watcher/task_watcher_bloc.dart';
-import 'package:flushbar/flushbar_helper.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -16,25 +15,14 @@ class TaskOverviewPage extends StatelessWidget {
       providers: [
         BlocProvider<TaskWatcherBloc>(
             create: (context) => getIt<TaskWatcherBloc>()
-              ..add(const TaskWatcherEvent.watchUncompletedStarted())),
+              ..add(const TaskWatcherEvent.watchAllStarted())),
         BlocProvider<TaskActorBloc>(
           create: (context) => getIt<TaskActorBloc>(),
         ),
       ],
       child: BlocListener<TaskActorBloc, TaskActorState>(
         listener: (context, state) {
-          state.maybeMap(
-              deleteFailure: (state) {
-                FlushbarHelper.createError(
-                  duration: const Duration(seconds: 5),
-                  message: state.taskFailure.map(
-                    unexpected: (_) => 'Something unexpected happened',
-                    insufficientPermissions: (_) => 'Insufficient permissions',
-                    unableToUpdate: (_) => 'Unable to update',
-                  ),
-                ).show(context);
-              },
-              orElse: () {});
+          state.maybeMap(deleteFailure: (state) {}, orElse: () {});
         },
         child: Scaffold(
           appBar: AppBar(

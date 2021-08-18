@@ -3,6 +3,8 @@ import 'package:pipelist/presentation/navigation/navigation_screen.dart';
 import 'package:pipelist/presentation/shared/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'presentation/tasks/task_overview/task_overview_page.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

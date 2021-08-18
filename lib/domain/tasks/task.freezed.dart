@@ -19,8 +19,8 @@ class _$TaskEntityTearOff {
   _TaskEntity call(
       {UniqueId? id,
       TaskTitle? title,
-      bool isDone = false,
-      Priority priority = 0,
+      bool? isDone,
+      Priority? priority,
       Description? description,
       DateTime? startDate,
       DateTime? dueDate,
@@ -50,8 +50,8 @@ mixin _$TaskEntity {
   UniqueId? get id =>
       throw _privateConstructorUsedError; //@Default("InboxUuid") UniqueId listId,
   TaskTitle? get title => throw _privateConstructorUsedError;
-  bool get isDone => throw _privateConstructorUsedError;
-  Priority get priority => throw _privateConstructorUsedError;
+  bool? get isDone => throw _privateConstructorUsedError;
+  Priority? get priority => throw _privateConstructorUsedError;
   Description? get description => throw _privateConstructorUsedError;
   DateTime? get startDate => throw _privateConstructorUsedError;
   DateTime? get dueDate => throw _privateConstructorUsedError;
@@ -72,8 +72,8 @@ abstract class $TaskEntityCopyWith<$Res> {
   $Res call(
       {UniqueId? id,
       TaskTitle? title,
-      bool isDone,
-      Priority priority,
+      bool? isDone,
+      Priority? priority,
       Description? description,
       DateTime? startDate,
       DateTime? dueDate,
@@ -115,11 +115,11 @@ class _$TaskEntityCopyWithImpl<$Res> implements $TaskEntityCopyWith<$Res> {
       isDone: isDone == freezed
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       priority: priority == freezed
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as Priority,
+              as Priority?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -157,8 +157,8 @@ abstract class _$TaskEntityCopyWith<$Res> implements $TaskEntityCopyWith<$Res> {
   $Res call(
       {UniqueId? id,
       TaskTitle? title,
-      bool isDone,
-      Priority priority,
+      bool? isDone,
+      Priority? priority,
       Description? description,
       DateTime? startDate,
       DateTime? dueDate,
@@ -202,11 +202,11 @@ class __$TaskEntityCopyWithImpl<$Res> extends _$TaskEntityCopyWithImpl<$Res>
       isDone: isDone == freezed
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       priority: priority == freezed
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
-              as Priority,
+              as Priority?,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -241,8 +241,8 @@ class _$_TaskEntity extends _TaskEntity {
   const _$_TaskEntity(
       {this.id,
       this.title,
-      this.isDone = false,
-      this.priority = 0,
+      this.isDone,
+      this.priority,
       this.description,
       this.startDate,
       this.dueDate,
@@ -255,12 +255,10 @@ class _$_TaskEntity extends _TaskEntity {
   final UniqueId? id;
   @override //@Default("InboxUuid") UniqueId listId,
   final TaskTitle? title;
-  @JsonKey(defaultValue: false)
   @override
-  final bool isDone;
-  @JsonKey(defaultValue: 0)
+  final bool? isDone;
   @override
-  final Priority priority;
+  final Priority? priority;
   @override
   final Description? description;
   @override
@@ -335,8 +333,8 @@ abstract class _TaskEntity extends TaskEntity {
   const factory _TaskEntity(
       {UniqueId? id,
       TaskTitle? title,
-      bool isDone,
-      Priority priority,
+      bool? isDone,
+      Priority? priority,
       Description? description,
       DateTime? startDate,
       DateTime? dueDate,
@@ -350,9 +348,9 @@ abstract class _TaskEntity extends TaskEntity {
   @override //@Default("InboxUuid") UniqueId listId,
   TaskTitle? get title => throw _privateConstructorUsedError;
   @override
-  bool get isDone => throw _privateConstructorUsedError;
+  bool? get isDone => throw _privateConstructorUsedError;
   @override
-  Priority get priority => throw _privateConstructorUsedError;
+  Priority? get priority => throw _privateConstructorUsedError;
   @override
   Description? get description => throw _privateConstructorUsedError;
   @override

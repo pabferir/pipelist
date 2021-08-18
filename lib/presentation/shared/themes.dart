@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const mPrimaryColor = Color(0xFFEA601C);
-const mSecondaryColor = Color(0xFFBFBFBF);
+const mPrimaryColor = Color(0xFFECE5C9);
+const mSecondaryColor = Color(0xFFDDBCA9);
 const mContentColorLightTheme = Color(0xFF181818);
 const mContentColorDarkTheme = Color(0xFFF5FCF9);
 const mWarninngColor = Color(0xFFF3BB1C);
@@ -10,13 +10,16 @@ const mErrorColor = Color(0xFFF03738);
 
 const mDefaultPadding = 20.0;
 
-final appBarTheme = AppBarTheme(centerTitle: false, elevation: 0);
-
 ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
     primaryColor: mPrimaryColor,
-    scaffoldBackgroundColor: Colors.white,
-    appBarTheme: appBarTheme,
+    scaffoldBackgroundColor: mPrimaryColor,
+    appBarTheme: AppBarTheme(
+      centerTitle: false,
+      elevation: 0,
+      textTheme: GoogleFonts.frauncesTextTheme(Theme.of(context).textTheme)
+          .apply(bodyColor: mContentColorLightTheme),
+    ),
     iconTheme: IconThemeData(color: mContentColorLightTheme),
     textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)
         .apply(bodyColor: mContentColorLightTheme),
@@ -26,10 +29,10 @@ ThemeData lightThemeData(BuildContext context) {
       error: mErrorColor,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
-      selectedItemColor: mContentColorLightTheme.withOpacity(0.7),
-      unselectedItemColor: mContentColorLightTheme.withOpacity(0.32),
-      selectedIconTheme: IconThemeData(color: mPrimaryColor),
+      backgroundColor: mPrimaryColor,
+      selectedItemColor: mContentColorLightTheme,
+      unselectedItemColor: mSecondaryColor,
+      selectedIconTheme: IconThemeData(color: mContentColorLightTheme),
       showUnselectedLabels: true,
     ),
   );
@@ -41,7 +44,11 @@ ThemeData darkThemeData(BuildContext context) {
   return ThemeData.dark().copyWith(
     primaryColor: mPrimaryColor,
     scaffoldBackgroundColor: mContentColorLightTheme,
-    appBarTheme: appBarTheme,
+    appBarTheme: AppBarTheme(
+        centerTitle: false,
+        elevation: 0,
+        textTheme: GoogleFonts.frauncesTextTheme(Theme.of(context).textTheme)
+            .apply(bodyColor: mPrimaryColor)),
     iconTheme: IconThemeData(color: mContentColorDarkTheme),
     textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)
         .apply(bodyColor: mContentColorDarkTheme),

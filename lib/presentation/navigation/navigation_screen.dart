@@ -29,7 +29,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         backgroundColor: mPrimaryColor,
         child: Icon(
           Icons.add_rounded,
-          color: Colors.white,
+          color: mContentColorLightTheme,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
