@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pipelist">
+    package="com.pabferir.pipelist">
    <application
         android:label="pipelist"
         android:icon="@mipmap/ic_launcher">
