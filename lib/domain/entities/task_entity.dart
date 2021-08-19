@@ -3,7 +3,7 @@ import 'package:pipelist/domain/entities/subtask_entity.dart';
 import 'package:uuid/uuid.dart';
 
 class TaskEntity extends Equatable {
-  final Uuid id;
+  final String id;
   final String title;
   final bool isComplete;
   final int priority;
@@ -11,29 +11,29 @@ class TaskEntity extends Equatable {
   final DateTime? startDate;
   final DateTime? dueDate;
   final DateTime? reminder;
-  final Uuid listId;
-  final List<Uuid>? tagIds;
+  final String listId;
+  final List<String>? tagIds;
   final List<SubtaskEntity>? subtasks;
 
   TaskEntity({
     required this.id,
     required this.title,
-    required this.isDone,
+    required this.isComplete,
     required this.priority,
-    this.description,
-    this.startDate,
-    this.dueDate,
-    this.reminder,
+    required this.description,
+    required this.startDate,
+    required this.dueDate,
+    required this.reminder,
     required this.listId,
-    this.tagIds,
-    this.subtasks,
+    required this.tagIds,
+    required this.subtasks,
   });
 
   @override
   List<Object?> get props => [
         id,
         title,
-        isDone,
+        isComplete,
         priority,
         description,
         startDate,
