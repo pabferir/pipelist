@@ -1,6 +1,5 @@
 import 'package:pipelist/domain/entities/task_entity.dart';
 import 'package:pipelist/infrastructure/dtos/subtask_dto.dart';
-import 'package:uuid/uuid.dart';
 
 class TaskDto {
   final String id;
