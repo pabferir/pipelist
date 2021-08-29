@@ -66,4 +66,36 @@ class TaskDto {
         tagIds: tagIds,
         subtasks: subtasks.map((subtaskDto) => subtaskDto.toDomain()).toList());
   }
+
+  factory TaskDto.fromJson(Map<String, dynamic> json) {
+    return TaskDto(
+      id: json['id'],
+      title: json['title'],
+      isComplete: json['isComplete'],
+      priority: json['priority'],
+      description: json['description'],
+      startDate: json['startDate'],
+      dueDate: json['dueDate'],
+      reminder: json['reminder'],
+      listId: json['listId'],
+      tagIds: json['tagIds'].map((tagId) => (tagId).toString()).toList(),
+      subtasks: json['subtasks']
+          .map((subtask) => SubtaskDto.fromJson(subtask))
+          .toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'isComplete': isComplete,
+        'priority': priority,
+        'description': description,
+        'startDate': startDate,
+        'dueDate': dueDate,
+        'reminder': reminder,
+        'listId': listId,
+        'tagIds': tagIds,
+        'subtasks': subtasks,
+      };
 }

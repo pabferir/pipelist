@@ -16,4 +16,13 @@ class SubtaskDto {
   SubtaskEntity toDomain() {
     return SubtaskEntity(title: title, isComplete: isComplete);
   }
+
+  factory SubtaskDto.fromJson(Map<String, dynamic> json) {
+    return SubtaskDto(title: json['title'], isComplete: json['isComplete']);
+  }
+
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'isComplete': isComplete,
+      };
 }
