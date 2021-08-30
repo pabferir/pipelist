@@ -50,28 +50,31 @@ class TaskDto {
 
   TaskEntity toDomain() {
     return TaskEntity(
-        id: id,
-        title: title,
-        isComplete: isComplete,
-        isPriority: isPriority,
-        startDate: DateTime.parse(startDate),
-        dueDate: DateTime.parse(dueDate),
-        reminder: DateTime.parse(reminder),
-        listId: listId,
-        tagIds: tagIds,
-        subtasks: subtasks.map((subtaskDto) => subtaskDto.toDomain()).toList());
+      id: id,
+      title: title,
+      isComplete: isComplete,
+      isPriority: isPriority,
+      startDate: startDate != '' ? DateTime.parse(startDate) : null,
+      dueDate: dueDate != '' ? DateTime.parse(dueDate) : null,
+      reminder: reminder != '' ? DateTime.parse(reminder) : null,
+      listId: listId,
+      tagIds: tagIds != List.empty() ? tagIds : null,
+      subtasks: subtasks != List.empty()
+          ? subtasks.map((subtaskDto) => subtaskDto.toDomain()).toList()
+          : null,
+    );
   }
 
   factory TaskDto.fromJson(Map<String, dynamic> json) {
     return TaskDto(
-      id: json['id'],
-      title: json['title'],
-      isComplete: json['isComplete'],
-      isPriority: json['isPriority'],
-      startDate: json['startDate'],
-      dueDate: json['dueDate'],
-      reminder: json['reminder'],
-      listId: json['listId'],
+      id: json['id'] as String,
+      title: json['title'] as String,
+      isComplete: json['isComplete'] as bool,
+      isPriority: json['isPriority'] as bool,
+      startDate: json['startDate'] as String,
+      dueDate: json['dueDate'] as String,
+      reminder: json['reminder'] as String,
+      listId: json['listId'] as String,
       tagIds: json['tagIds'].map((tagId) => (tagId).toString()).toList(),
       subtasks: json['subtasks']
           .map((subtask) => SubtaskDto.fromJson(subtask))
