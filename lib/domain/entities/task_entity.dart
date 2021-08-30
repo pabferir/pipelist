@@ -6,8 +6,7 @@ class TaskEntity extends Equatable {
   final String id;
   final String title;
   final bool isComplete;
-  final int priority;
-  final String? description;
+  final bool isPriority;
   final DateTime? startDate;
   final DateTime? dueDate;
   final DateTime? reminder;
@@ -19,8 +18,7 @@ class TaskEntity extends Equatable {
     required this.id,
     required this.title,
     required this.isComplete,
-    required this.priority,
-    required this.description,
+    required this.isPriority,
     required this.startDate,
     required this.dueDate,
     required this.reminder,
@@ -34,8 +32,7 @@ class TaskEntity extends Equatable {
         id,
         title,
         isComplete,
-        priority,
-        description,
+        isPriority,
         startDate,
         dueDate,
         reminder,

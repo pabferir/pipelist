@@ -5,8 +5,7 @@ class TaskDto {
   final String id;
   final String title;
   final bool isComplete;
-  final int priority;
-  final String description;
+  final bool isPriority;
   final String startDate;
   final String dueDate;
   final String reminder;
@@ -18,8 +17,7 @@ class TaskDto {
     required this.id,
     required this.title,
     required this.isComplete,
-    required this.priority,
-    required this.description,
+    required this.isPriority,
     required this.startDate,
     required this.dueDate,
     required this.reminder,
@@ -33,8 +31,7 @@ class TaskDto {
       id: task.id.toString(),
       title: task.title,
       isComplete: task.isComplete,
-      priority: task.priority,
-      description: task.description ?? '',
+      isPriority: task.isPriority,
       startDate:
           task.startDate != null ? task.startDate!.toIso8601String() : '',
       dueDate: task.dueDate != null ? task.dueDate!.toIso8601String() : '',
@@ -56,8 +53,7 @@ class TaskDto {
         id: id,
         title: title,
         isComplete: isComplete,
-        priority: priority,
-        description: description,
+        isPriority: isPriority,
         startDate: DateTime.parse(startDate),
         dueDate: DateTime.parse(dueDate),
         reminder: DateTime.parse(reminder),
@@ -71,8 +67,7 @@ class TaskDto {
       id: json['id'],
       title: json['title'],
       isComplete: json['isComplete'],
-      priority: json['priority'],
-      description: json['description'],
+      isPriority: json['isPriority'],
       startDate: json['startDate'],
       dueDate: json['dueDate'],
       reminder: json['reminder'],
@@ -88,8 +83,7 @@ class TaskDto {
         'id': id,
         'title': title,
         'isComplete': isComplete,
-        'priority': priority,
-        'description': description,
+        'isPriority': isPriority,
         'startDate': startDate,
         'dueDate': dueDate,
         'reminder': reminder,
