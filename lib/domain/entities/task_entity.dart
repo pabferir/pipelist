@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:pipelist/domain/entities/subtask_entity.dart';
-import 'package:uuid/uuid.dart';
 
 class TaskEntity extends Equatable {
   final String id;
