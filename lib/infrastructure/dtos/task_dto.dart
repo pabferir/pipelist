@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pipelist/domain/entities/task_entity.dart';
 import 'package:pipelist/infrastructure/dtos/subtask_dto.dart';
 
@@ -77,6 +78,25 @@ class TaskDto {
       listId: json['listId'] as String,
       tagIds: json['tagIds'].map((tagId) => (tagId).toString()).toList(),
       subtasks: json['subtasks']
+          .map((subtask) => SubtaskDto.fromJson(subtask))
+          .toList(),
+    );
+  }
+
+  factory TaskDto.fromSnapshot(DocumentSnapshot snapshot) {
+    return TaskDto(
+      id: snapshot.id,
+      title: snapshot.get('title') as String,
+      isComplete: snapshot.get('isComplete') as bool,
+      isPriority: snapshot.get('isPriority') as bool,
+      startDate: snapshot.get('startDate') as String,
+      dueDate: snapshot.get('dueDate') as String,
+      reminder: snapshot.get('reminder') as String,
+      listId: snapshot.get('listId') as String,
+      tagIds:
+          snapshot.get('tagIds').map((tagId) => (tagId).toString()).toList(),
+      subtasks: snapshot
+          .get('subtasks')
           .map((subtask) => SubtaskDto.fromJson(subtask))
           .toList(),
     );

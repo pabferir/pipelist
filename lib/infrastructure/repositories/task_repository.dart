@@ -20,7 +20,7 @@ class TaskRepository implements ITaskMediator {
   Stream<List<TaskEntity>> readAllTasks() async* {
     _firestore.collection('tasks').snapshots().map((snapshot) => {
           snapshot.docs
-              .map((doc) => (TaskDto.fromJson(doc.data())).toDomain())
+              .map((doc) => (TaskDto.fromSnapshot(doc)).toDomain())
               .toList(),
         });
   }
@@ -32,7 +32,7 @@ class TaskRepository implements ITaskMediator {
         .snapshots()
         .map((snapshot) => {
               snapshot.docs
-                  .map((doc) => (TaskDto.fromJson(doc.data())).toDomain()),
+                  .map((doc) => (TaskDto.fromSnapshot(doc)).toDomain()),
             })
         .map(
           (set) => set
