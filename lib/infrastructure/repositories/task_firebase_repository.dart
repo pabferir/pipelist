@@ -39,11 +39,6 @@ class TaskFirebaseRepository implements ITaskMediator {
             ),
           ),
         );
-    // .map(
-    //   (tasks) => tasks.where(
-    //     (task) => !task.isComplete,
-    //   ),
-    // );
     yield uncompletedTaskList.where((task) => !task.isComplete).toList();
   }
 

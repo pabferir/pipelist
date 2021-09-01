@@ -1,3 +1,4 @@
+import 'package:pipelist/domain/entities/simple_task_entity.dart';
 import 'package:pipelist/domain/entities/task_entity.dart';
 
 abstract class ITaskMediator {
