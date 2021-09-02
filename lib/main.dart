@@ -1,129 +1,110 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:pipelist/application/blocs/task_reader/task_loader_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pipelist/presentation/widgets/tasks_overview_body.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pipelist/application/blocs/task_handler/task_handler_bloc.dart';
+import 'package:pipelist/infrastructure/repositories/firestore_repository.dart';
+import 'package:pipelist/presentation/pages/contexts_page.dart';
+import 'package:pipelist/presentation/pages/inbox_page.dart';
+import 'package:pipelist/presentation/pages/lists_page.dart';
+import 'package:pipelist/presentation/pages/reviews_page.dart';
+import 'package:pipelist/presentation/widgets/add_task_form.dart';
 
-import 'infrastructure/repositories/task_firebase_repository.dart';
+import 'application/blocs/app_navigation_handler/app_navigation_handler_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(BlocApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class BlocApp extends StatelessWidget {
+  const BlocApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pipelist',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primaryColor: Color(0xFFFFF6E9),
-          fontFamily: GoogleFonts.inter().fontFamily),
-      home: MyHomePage(title: 'Entrada'),
+        primaryColor: Colors.blue,
+      ),
+      home: BlocProvider<NavigationBloc>(
+        create: (context) => NavigationBloc()..add(AppStarted()),
+        child: HomeScreen(),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TaskLoaderBloc>(
+    return BlocProvider<SimpleTaskHandlerBloc>(
       create: (context) {
-        return TaskLoaderBloc(
-          mediator: TaskFirebaseRepository(),
-        )..add(ShowAllTasksStarted());
+        return SimpleTaskHandlerBloc(mediator: FirestoreRepository())
+          ..add(TasksLoaded());
       },
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xFFFFF6E9),
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(
-                  Icons.account_circle_outlined,
-                  color: Color(0xFFA99073),
+      child: BlocBuilder<NavigationBloc, NavigationState>(
+        builder: (context, activePage) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Pipelist'), // Cambiar por contexto
+            ),
+            body: _resolveCurrentPage(activePage),
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex:
+                  BlocProvider.of<NavigationBloc>(context).currentPageIndex,
+              type: BottomNavigationBarType.fixed,
+              items: [
+                BottomNavigationBarItem(
+                  label: "Inbox",
+                  icon: Icon(
+                    Icons.inbox_outlined,
+                  ),
                 ),
-                iconSize: 36,
-                tooltip: 'Profile',
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('No profile available')));
-                },
-              );
-            },
-          ),
-          textTheme: GoogleFonts.sourceSerifProTextTheme(),
-          centerTitle: true,
-          title: Text(
-            this.title,
-            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.more_vert_outlined,
-                color: Color(0xFFA99073),
-              ),
-              iconSize: 36,
-              tooltip: 'Options',
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('No options available')));
-              },
+                BottomNavigationBarItem(
+                  label: "Lists",
+                  icon: Icon(
+                    Icons.book_outlined,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "Add",
+                  icon: Icon(
+                    Icons.add_rounded,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "Contexts",
+                  icon: Icon(
+                    Icons.fact_check_outlined,
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "Reviews",
+                  icon: Icon(
+                    Icons.local_cafe_outlined,
+                  ),
+                ),
+              ],
+              onTap: (index) => BlocProvider.of<NavigationBloc>(context)
+                  .add(PageUpdated(pageIndex: index)),
             ),
-          ],
-        ),
-        body: TasksOverviewBody(),
-        backgroundColor: Color(0xFFFFF6E9),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color(0xFFFFF6E9),
-          items: [
-            BottomNavigationBarItem(
-              label: "Inbox",
-              icon: Icon(
-                Icons.inbox,
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "Lists",
-              icon: Icon(
-                Icons.book_outlined,
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "Add",
-              icon: Icon(
-                Icons.add_rounded,
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "Contexts",
-              icon: Icon(
-                Icons.fact_check_outlined,
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: "Reviews",
-              icon: Icon(
-                Icons.local_cafe_outlined,
-              ),
-            ),
-          ],
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          iconSize: 24,
-          unselectedIconTheme: IconThemeData(color: Color(0xFF000000)),
-          selectedIconTheme: IconThemeData(color: Color(0xFF000000)),
-        ),
+          );
+        },
       ),
     );
+  }
+
+  _resolveCurrentPage(NavigationState activePage) {
+    if (activePage is InboxPageLoadSucceded)
+      return InboxPage();
+    else if (activePage is ListsPageLoadSucceded)
+      return ListsPage();
+    else if (activePage is AddFormLoadSucceded)
+      return AddTaskForm();
+    else if (activePage is ContextsPageLoadSucceded)
+      return ContextsPage();
+    else if (activePage is ReviewsPageLoadSucceded) return ReviewsPage();
   }
 }
