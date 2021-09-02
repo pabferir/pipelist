@@ -7,20 +7,19 @@ import 'package:pipelist/domain/mediators/i_task_mediator.dart';
 part 'task_handler_event.dart';
 part 'task_handler_state.dart';
 
-class SimpleTaskHandlerBloc
-    extends Bloc<SimpleTaskHandlerEvent, SimpleTaskHandlerState> {
+class TaskHandlerBloc extends Bloc<TaskHandlerEvent, TaskHandlerState> {
   final ITaskMediator _mediator;
   StreamSubscription? _streamSubscription;
 
-  SimpleTaskHandlerBloc({required ITaskMediator mediator})
+  TaskHandlerBloc({required ITaskMediator mediator})
       : _mediator = mediator,
         super(TasksLoadInProgress());
 
-  SimpleTaskHandlerState get initialState => TasksLoadInProgress();
+  TaskHandlerState get initialState => TasksLoadInProgress();
 
   @override
-  Stream<SimpleTaskHandlerState> mapEventToState(
-    SimpleTaskHandlerEvent event,
+  Stream<TaskHandlerState> mapEventToState(
+    TaskHandlerEvent event,
   ) async* {
     if (event is TasksLoaded) {
       yield* _mapTasksLoadedToState();
@@ -39,7 +38,7 @@ class SimpleTaskHandlerBloc
     }
   }
 
-  Stream<SimpleTaskHandlerState> _mapTasksLoadedToState() async* {
+  Stream<TaskHandlerState> _mapTasksLoadedToState() async* {
     _streamSubscription?.cancel();
     _streamSubscription = _mediator.loadTasks().listen(
       (tasks) {
@@ -50,26 +49,23 @@ class SimpleTaskHandlerBloc
     );
   }
 
-  Stream<SimpleTaskHandlerState> _mapTaskAddedToState(TaskAdded event) async* {
+  Stream<TaskHandlerState> _mapTaskAddedToState(TaskAdded event) async* {
     _mediator.createTask(event.taskEntity);
   }
 
-  Stream<SimpleTaskHandlerState> _mapTaskUpdatedToState(
-      TaskUpdated event) async* {
+  Stream<TaskHandlerState> _mapTaskUpdatedToState(TaskUpdated event) async* {
     _mediator.updateTask(event.taskEntity);
   }
 
-  Stream<SimpleTaskHandlerState> _mapTaskDeletedToState(
-      TaskDeleted event) async* {
+  Stream<TaskHandlerState> _mapTaskDeletedToState(TaskDeleted event) async* {
     _mediator.deleteTask(event.taskEntity);
   }
 
-  Stream<SimpleTaskHandlerState> _mapClearCompletedToState() async* {}
+  Stream<TaskHandlerState> _mapClearCompletedToState() async* {}
 
-  Stream<SimpleTaskHandlerState> _mapToggleAllTasksToState() async* {}
+  Stream<TaskHandlerState> _mapToggleAllTasksToState() async* {}
 
-  Stream<SimpleTaskHandlerState> _mapTasksChangedToState(
-      TasksChanged event) async* {
+  Stream<TaskHandlerState> _mapTasksChangedToState(TasksChanged event) async* {
     yield TasksLoadSuccess(event.tasksEntities);
   }
 }

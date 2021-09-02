@@ -1,15 +1,15 @@
 part of 'task_handler_bloc.dart';
 
-abstract class SimpleTaskHandlerState extends Equatable {
-  const SimpleTaskHandlerState();
+abstract class TaskHandlerState extends Equatable {
+  const TaskHandlerState();
 
   @override
   List<Object> get props => [];
 }
 
-class TasksLoadInProgress extends SimpleTaskHandlerState {}
+class TasksLoadInProgress extends TaskHandlerState {}
 
-class TasksLoadSuccess extends SimpleTaskHandlerState {
+class TasksLoadSuccess extends TaskHandlerState {
   final List<TaskEntity> loadedTasks;
 
   const TasksLoadSuccess([this.loadedTasks = const []]);
@@ -21,4 +21,4 @@ class TasksLoadSuccess extends SimpleTaskHandlerState {
   String toString() => 'TasksLoadSuccess { loadedTasks: $loadedTasks }';
 }
 
-class TasksLoadFailure extends SimpleTaskHandlerState {}
+class TasksLoadFailure extends TaskHandlerState {}

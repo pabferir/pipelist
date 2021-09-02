@@ -14,11 +14,11 @@ import 'application/blocs/app_navigation_handler/app_navigation_handler_bloc.dar
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(BlocApp());
+  runApp(PipelistApp());
 }
 
-class BlocApp extends StatelessWidget {
-  const BlocApp({Key? key}) : super(key: key);
+class PipelistApp extends StatelessWidget {
+  const PipelistApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,9 @@ class BlocApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SimpleTaskHandlerBloc>(
+    return BlocProvider<TaskHandlerBloc>(
       create: (context) {
-        return SimpleTaskHandlerBloc(mediator: FirestoreRepository())
+        return TaskHandlerBloc(mediator: FirestoreRepository())
           ..add(TasksLoaded());
       },
       child: BlocBuilder<NavigationBloc, NavigationState>(

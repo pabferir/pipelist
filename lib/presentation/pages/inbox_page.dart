@@ -12,20 +12,21 @@ class InboxPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SimpleTaskHandlerBloc, SimpleTaskHandlerState>(
+    return BlocBuilder<TaskHandlerBloc, TaskHandlerState>(
       builder: (context, state) {
         if (state is TasksLoadInProgress) {
           return Center(child: CircularProgressIndicator());
         } else if (state is TasksLoadSuccess) {
           final tasks = state.loadedTasks;
           return ListView.builder(
+            key: UniqueKey(),
             itemCount: tasks.length,
             itemBuilder: (BuildContext context, int index) {
               final task = tasks[index];
               return TaskItem(
                 task: task,
                 onDismissed: (direction) {
-                  BlocProvider.of<SimpleTaskHandlerBloc>(context)
+                  BlocProvider.of<TaskHandlerBloc>(context)
                       .add(TaskDeleted(task));
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text('Task deleted'),
@@ -39,7 +40,7 @@ class InboxPage extends StatelessWidget {
                       },
                     ),
                   ).then((updatedTask) {
-                    BlocProvider.of<SimpleTaskHandlerBloc>(context).add(
+                    BlocProvider.of<TaskHandlerBloc>(context).add(
                       TaskUpdated(task.copyWith(
                         title: task.title,
                         listId: task.listId,
@@ -49,7 +50,7 @@ class InboxPage extends StatelessWidget {
                   });
                 },
                 onCompleteToggle: (_) {
-                  BlocProvider.of<SimpleTaskHandlerBloc>(context).add(
+                  BlocProvider.of<TaskHandlerBloc>(context).add(
                     TaskUpdated(
                       task.copyWith(
                         isComplete: !task.isComplete,

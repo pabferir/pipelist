@@ -1,15 +1,15 @@
 part of 'task_handler_bloc.dart';
 
-abstract class SimpleTaskHandlerEvent extends Equatable {
-  const SimpleTaskHandlerEvent();
+abstract class TaskHandlerEvent extends Equatable {
+  const TaskHandlerEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class TasksLoaded extends SimpleTaskHandlerEvent {}
+class TasksLoaded extends TaskHandlerEvent {}
 
-class TaskAdded extends SimpleTaskHandlerEvent {
+class TaskAdded extends TaskHandlerEvent {
   final TaskEntity taskEntity;
 
   const TaskAdded(this.taskEntity);
@@ -21,7 +21,7 @@ class TaskAdded extends SimpleTaskHandlerEvent {
   String toString() => 'TaskAdded { taskEntity: $taskEntity }';
 }
 
-class TaskUpdated extends SimpleTaskHandlerEvent {
+class TaskUpdated extends TaskHandlerEvent {
   final TaskEntity taskEntity;
 
   const TaskUpdated(this.taskEntity);
@@ -33,7 +33,7 @@ class TaskUpdated extends SimpleTaskHandlerEvent {
   String toString() => 'TaskUpdated { taskEntity: $taskEntity }';
 }
 
-class TaskDeleted extends SimpleTaskHandlerEvent {
+class TaskDeleted extends TaskHandlerEvent {
   final TaskEntity taskEntity;
 
   const TaskDeleted(this.taskEntity);
@@ -45,11 +45,11 @@ class TaskDeleted extends SimpleTaskHandlerEvent {
   String toString() => 'TaskDeleted { taskEntity: $taskEntity }';
 }
 
-class ClearTasksCompleted extends SimpleTaskHandlerEvent {}
+class ClearTasksCompleted extends TaskHandlerEvent {}
 
-class ToggleAllTasks extends SimpleTaskHandlerEvent {}
+class ToggleAllTasks extends TaskHandlerEvent {}
 
-class TasksChanged extends SimpleTaskHandlerEvent {
+class TasksChanged extends TaskHandlerEvent {
   final List<TaskEntity> tasksEntities;
 
   const TasksChanged(this.tasksEntities);
