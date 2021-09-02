@@ -9,18 +9,18 @@ class FirestoreRepository implements ITaskMediator {
   @override
   Future<void> createTask(TaskEntity taskEntity) {
     return _firestore
-        .collection('/tasks')
+        .collection('tasks')
         .add(TaskDto.fromEntity(taskEntity).toDoc());
   }
 
   @override
   Future<void> deleteTask(TaskEntity taskEntity) {
-    return _firestore.collection('/tasks').doc(taskEntity.id).delete();
+    return _firestore.collection('tasks').doc(taskEntity.id).delete();
   }
 
   @override
   Stream<List<TaskEntity>> loadTasks() {
-    return _firestore.collection('/tasks').snapshots().map((snapshot) {
+    return _firestore.collection('tasks').snapshots().map((snapshot) {
       return snapshot.docs
           .map((doc) => TaskDto.fromSnapshot(doc).toEntity())
           .toList();
@@ -30,7 +30,7 @@ class FirestoreRepository implements ITaskMediator {
   @override
   Future<void> updateTask(TaskEntity taskEntity) {
     return _firestore
-        .collection('/tasks')
+        .collection('tasks')
         .doc(taskEntity.id)
         .update(TaskDto.fromEntity(taskEntity).toDoc());
   }

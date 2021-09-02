@@ -52,6 +52,7 @@ class HomeScreen extends StatelessWidget {
             ),
             body: _resolveCurrentPage(activePage),
             bottomNavigationBar: BottomNavigationBar(
+              key: UniqueKey(),
               currentIndex:
                   BlocProvider.of<NavigationBloc>(context).currentPageIndex,
               type: BottomNavigationBarType.fixed,

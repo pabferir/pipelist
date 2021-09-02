@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pipelist/domain/entities/task_entity.dart';
-import 'package:pipelist/app_keys.dart';
 
 class TaskItem extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
@@ -20,11 +19,12 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: AppKeys.taskItem(task.id),
+      key: UniqueKey(),
+      onDismissed: onDismissed,
       child: ListTile(
         onTap: onTap,
         leading: Checkbox(
-          key: AppKeys.taskItemCheckbox(task.id),
+          key: UniqueKey(),
           value: task.isComplete,
           onChanged: onCompleteToggle,
         ),
@@ -34,7 +34,7 @@ class TaskItem extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Text(
               task.title,
-              key: AppKeys.taskItemTitle(task.id),
+              key: UniqueKey(),
               style: Theme.of(context).textTheme.headline6,
             ),
           ),

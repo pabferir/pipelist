@@ -5,8 +5,6 @@ import 'package:pipelist/application/blocs/task_handler/task_handler_bloc.dart';
 import 'package:pipelist/presentation/widgets/edit_task_form.dart';
 import 'package:pipelist/presentation/widgets/task_item_widget.dart';
 
-import '../../app_keys.dart';
-
 class InboxPage extends StatelessWidget {
   const InboxPage({Key? key}) : super(key: key);
 
@@ -62,7 +60,7 @@ class InboxPage extends StatelessWidget {
             },
           );
         } else {
-          return Container(key: AppKeys.taskListEmptyContainer);
+          return Container(key: UniqueKey());
         }
       },
     );
