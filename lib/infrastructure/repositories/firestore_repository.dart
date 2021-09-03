@@ -10,7 +10,8 @@ class FirestoreRepository implements ITaskMediator {
   Future<void> createTask(TaskEntity taskEntity) {
     return _firestore
         .collection('tasks')
-        .add(TaskDto.fromEntity(taskEntity).toDoc());
+        .doc(taskEntity.id)
+        .set(TaskDto.fromEntity(taskEntity).toDoc());
   }
 
   @override

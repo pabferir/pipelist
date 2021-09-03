@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:uuid/uuid.dart';
 
 class TaskEntity extends Equatable {
   final String id;
@@ -7,11 +8,11 @@ class TaskEntity extends Equatable {
   final String listId;
 
   TaskEntity({
-    required this.id,
+    String? id,
     required this.title,
     required this.isComplete,
     required this.listId,
-  });
+  }) : this.id = id ?? Uuid().v1();
 
   @override
   List<Object?> get props => [
@@ -28,7 +29,7 @@ class TaskEntity extends Equatable {
     String? listId,
   }) {
     return TaskEntity(
-      id: id ?? this.id,
+      id: this.id,
       title: title ?? this.title,
       isComplete: isComplete ?? this.isComplete,
       listId: listId ?? this.listId,

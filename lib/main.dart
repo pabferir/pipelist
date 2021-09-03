@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pipelist/application/blocs/task_handler/task_handler_bloc.dart';
+import 'package:pipelist/domain/entities/task_entity.dart';
 import 'package:pipelist/infrastructure/repositories/firestore_repository.dart';
 import 'package:pipelist/presentation/pages/contexts_page.dart';
 import 'package:pipelist/presentation/pages/inbox_page.dart';
 import 'package:pipelist/presentation/pages/lists_page.dart';
 import 'package:pipelist/presentation/pages/reviews_page.dart';
-import 'package:pipelist/presentation/widgets/add_task_form.dart';
+import 'package:pipelist/presentation/widgets/add_edit_task_form.dart';
 
-import 'application/blocs/app_navigation_handler/app_navigation_handler_bloc.dart';
+import 'application/blocs/navigation_handler/navigation_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +51,7 @@ class HomeScreen extends StatelessWidget {
             appBar: AppBar(
               title: Text('Pipelist'), // Cambiar por contexto
             ),
-            body: _resolveCurrentPage(activePage),
+            body: _resolveCurrentPage(context, activePage),
             bottomNavigationBar: BottomNavigationBar(
               key: UniqueKey(),
               currentIndex:
@@ -88,8 +89,31 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ],
-              onTap: (index) => BlocProvider.of<NavigationBloc>(context)
-                  .add(PageUpdated(pageIndex: index)),
+              onTap: (index) {
+                if (index == 2) {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (_) => AddEditTaskForm(
+                      key: UniqueKey(),
+                      isEdit: false,
+                      onSaveCallback: (title) {
+                        BlocProvider.of<TaskHandlerBloc>(context).add(
+                          TaskAdded(
+                            TaskEntity(
+                              title: title,
+                              isComplete: false,
+                              listId: 'inbox',
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  BlocProvider.of<NavigationBloc>(context)
+                      .add(PageUpdated(pageIndex: index));
+                }
+              },
             ),
           );
         },
@@ -97,13 +121,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  _resolveCurrentPage(NavigationState activePage) {
+  _resolveCurrentPage(BuildContext context, NavigationState activePage) {
     if (activePage is InboxPageLoadSucceded)
       return InboxPage();
     else if (activePage is ListsPageLoadSucceded)
       return ListsPage();
-    else if (activePage is AddFormLoadSucceded)
-      return AddTaskForm();
     else if (activePage is ContextsPageLoadSucceded)
       return ContextsPage();
     else if (activePage is ReviewsPageLoadSucceded) return ReviewsPage();
