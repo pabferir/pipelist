@@ -53,8 +53,8 @@ jobs:
     # you can run integration tests.
     # Read more on Flutter integration testing here:
     # https://flutter.dev/docs/testing/integration-tests
-    - name: Run integration tests
-      run: flutter drive --target=test_driver/app.dart
+    # - name: Run integration tests
+    #   run: flutter drive --target=test_driver/app.dart
 
     # Note: This workflow builds the apk in release mode
     # since the flutter build command defaults to --release.
