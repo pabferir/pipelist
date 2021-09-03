@@ -37,7 +37,7 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
     } else if (this.currentPageIndex == 1) {
       yield ListsPageLoadSucceded();
     } else if (this.currentPageIndex == 2) {
-      yield AddFormLoadSucceded();
+      yield AddEditFormLoadSucceded();
     } else if (this.currentPageIndex == 3) {
       yield ContextsPageLoadSucceded();
     } else if (this.currentPageIndex == 4) {

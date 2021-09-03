@@ -25,7 +25,7 @@ class InboxPageLoadSucceded extends NavigationState {}
 
 class ListsPageLoadSucceded extends NavigationState {}
 
-class AddFormLoadSucceded extends NavigationState {}
+class AddEditFormLoadSucceded extends NavigationState {}
 
 class ContextsPageLoadSucceded extends NavigationState {}
 

@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   cloud_firestore: ^2.4.0
-  firebase_auth: ^3.0.2
   google_fonts: ^2.1.0
   bloc: ^7.1.0
   flutter_bloc: ^7.1.0
@@ -20,6 +19,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  bloc_test: ^8.1.0
     
 flutter:
   uses-material-design: true
