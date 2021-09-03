@@ -1,4 +1,4 @@
-part of 'app_navigation_handler_bloc.dart';
+part of 'navigation_bloc.dart';
 
 abstract class NavigationState extends Equatable {
   const NavigationState();

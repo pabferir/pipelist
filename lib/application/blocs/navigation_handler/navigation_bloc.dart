@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-part 'app_navigation_handler_event.dart';
-part 'app_navigation_handler_state.dart';
+part 'navigation_event.dart';
+part 'navigation_state.dart';
 
 class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   int currentPageIndex = 0;
