@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pipelist/domain/entities/task_entity.dart';
 
-class TaskItem extends StatelessWidget {
+class TaskItemWidget extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
   final GestureTapCallback onTap;
   final ValueChanged<bool?>? onCompleteToggle;
   final TaskEntity task;
 
-  const TaskItem({
+  const TaskItemWidget({
     Key? key,
     required this.onDismissed,
     required this.onTap,
@@ -40,6 +40,7 @@ class TaskItem extends StatelessWidget {
           ),
         ),
       ),
+      background: Container(color: Colors.red),
     );
   }
 }
