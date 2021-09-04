@@ -38,6 +38,8 @@ class TaskHandlerBloc extends Bloc<TaskHandlerEvent, TaskHandlerState> {
       yield* _mapTasksChangedToState(event);
     } else if (event is TasksByListLoaded) {
       yield* _mapTasksByListLoadedToState(event);
+    } else if (event is TasksInInboxLoaded) {
+      yield* _mapTasksInInboxLoadedToState();
     }
   }
 
@@ -76,6 +78,17 @@ class TaskHandlerBloc extends Bloc<TaskHandlerEvent, TaskHandlerState> {
       TasksByListLoaded event) async* {
     _streamSubscription?.cancel();
     _streamSubscription = _mediator.loadTasksByList(event.listEntity).listen(
+      (tasks) {
+        add(
+          TasksChanged(tasks),
+        );
+      },
+    );
+  }
+
+  Stream<TaskHandlerState> _mapTasksInInboxLoadedToState() async* {
+    _streamSubscription?.cancel();
+    _streamSubscription = _mediator.loadTasksInInbox().listen(
       (tasks) {
         add(
           TasksChanged(tasks),

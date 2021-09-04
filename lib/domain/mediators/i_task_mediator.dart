@@ -7,4 +7,5 @@ abstract class ITaskMediator {
   Future<void> updateTask(TaskEntity taskEntity);
   Future<void> deleteTask(TaskEntity taskEntity);
   Stream<List<TaskEntity>> loadTasksByList(ListEntity listEntity);
+  Stream<List<TaskEntity>> loadTasksInInbox();
 }

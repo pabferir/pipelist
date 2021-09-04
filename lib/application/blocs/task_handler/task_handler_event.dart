@@ -71,3 +71,5 @@ class TasksByListLoaded extends TaskHandlerEvent {
   @override
   String toString() => 'TasksByListLoaded { listEntity: $listEntity }';
 }
+
+class TasksInInboxLoaded extends TaskHandlerEvent {}

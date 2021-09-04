@@ -38,3 +38,19 @@ class TasksByListLoadSuccess extends TaskHandlerState {
 }
 
 class TasksByListLoadFailure extends TaskHandlerState {}
+
+class TasksInInboxLoadInProgress extends TaskHandlerState {}
+
+class TasksInInboxLoadSuccess extends TaskHandlerState {
+  final List<TaskEntity> loadedTasks;
+
+  const TasksInInboxLoadSuccess([this.loadedTasks = const []]);
+
+  @override
+  List<Object> get props => [loadedTasks];
+
+  @override
+  String toString() => 'TasksInInboxLoadSuccess { loadedTasks: $loadedTasks }';
+}
+
+class TasksInInboxLoadFailure extends TaskHandlerState {}
