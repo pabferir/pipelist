@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pipelist/application/blocs/list_handler/list_handler_bloc.dart';
 import 'package:pipelist/application/blocs/task_handler/task_handler_bloc.dart';
 import 'package:pipelist/domain/entities/list_entity.dart';
 import 'package:pipelist/presentation/widgets/add_edit_task_form.dart';
@@ -12,14 +13,17 @@ class TaskListScreen extends StatelessWidget {
   const TaskListScreen({Key? key, required this.list}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext widgetContext) {
+    final listBloc = BlocProvider.of<ListHandlerBloc>(widgetContext);
+
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back_rounded),
             onPressed: () {
-              BlocProvider.of<TaskHandlerBloc>(context)..add(TasksLoaded());
-              Navigator.of(context).pop();
+              BlocProvider.of<TaskHandlerBloc>(widgetContext)
+                ..add(TasksLoaded());
+              Navigator.of(widgetContext).pop();
             },
           ),
           title: Text(list.title),
@@ -46,14 +50,15 @@ class TaskListScreen extends StatelessWidget {
                     return TaskItemWidget(
                       task: task,
                       onDismissed: (direction) {
-                        BlocProvider.of<TaskHandlerBloc>(context)
+                        BlocProvider.of<TaskHandlerBloc>(widgetContext)
                             .add(TaskDeleted(task));
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(widgetContext)
+                            .showSnackBar(SnackBar(
                           content: Text('Tarea eliminada'),
                           action: SnackBarAction(
                             label: 'DESHACER',
                             onPressed: () {
-                              BlocProvider.of<TaskHandlerBloc>(context)
+                              BlocProvider.of<TaskHandlerBloc>(widgetContext)
                                   .add(TaskAdded(task));
                             },
                           ),
@@ -61,25 +66,43 @@ class TaskListScreen extends StatelessWidget {
                       },
                       onTap: () {
                         showModalBottomSheet(
-                          context: context,
-                          builder: (_) => AddEditTaskForm(
-                            key: UniqueKey(),
-                            isEdit: true,
-                            task: task,
-                            onSaveCallback: (title) {
-                              BlocProvider.of<TaskHandlerBloc>(context).add(
-                                TaskUpdated(
-                                  task.copyWith(
-                                    title: title,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                          context: newContext,
+                          builder: (_) {
+                            return BlocProvider.value(
+                              value: listBloc,
+                              child: BlocBuilder<ListHandlerBloc,
+                                  ListHandlerState>(
+                                builder: (widgetContext, listHandlerState) {
+                                  if (listHandlerState is ListsLoadSuccess) {
+                                    return AddEditTaskForm(
+                                      key: UniqueKey(),
+                                      isEdit: true,
+                                      task: task,
+                                      lists: listHandlerState.loadedLists,
+                                      onSaveCallback: (title, listId) {
+                                        BlocProvider.of<TaskHandlerBloc>(
+                                                widgetContext)
+                                            .add(
+                                          TaskUpdated(
+                                            task.copyWith(
+                                              title: title,
+                                              listId: listId,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  } else
+                                    return Center(
+                                        child: CircularProgressIndicator());
+                                },
+                              ),
+                            );
+                          },
                         );
                       },
                       onCompleteToggle: (_) {
-                        BlocProvider.of<TaskHandlerBloc>(context).add(
+                        BlocProvider.of<TaskHandlerBloc>(widgetContext).add(
                           TaskUpdated(
                             task.copyWith(
                               isComplete: !task.isComplete,

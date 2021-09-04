@@ -6,7 +6,6 @@ import 'package:pipelist/application/blocs/navigation_handler/navigation_bloc.da
 import 'package:pipelist/application/blocs/task_handler/task_handler_bloc.dart';
 import 'package:pipelist/domain/entities/list_entity.dart';
 import 'package:pipelist/domain/entities/task_entity.dart';
-import 'package:pipelist/infrastructure/repositories/firestore_repository.dart';
 import 'package:pipelist/presentation/pages/contexts_page.dart';
 import 'package:pipelist/presentation/pages/inbox_page.dart';
 import 'package:pipelist/presentation/pages/lists_page.dart';
@@ -15,103 +14,102 @@ import 'package:pipelist/presentation/widgets/add_edit_list_form.dart';
 import 'package:pipelist/presentation/widgets/add_edit_task_form.dart';
 
 class HomeScreen extends StatelessWidget {
-  final _firestoreRepository = FirestoreRepository();
-
   @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<TaskHandlerBloc>(
-          create: (context) {
-            return TaskHandlerBloc(mediator: _firestoreRepository)
-              ..add(TasksLoaded());
-          },
-        ),
-        BlocProvider<ListHandlerBloc>(
-          create: (context) {
-            return ListHandlerBloc(mediator: _firestoreRepository)
-              ..add(ListsLoaded());
-          },
-        ),
-      ],
-      child: BlocBuilder<NavigationBloc, NavigationState>(
-        builder: (context, activePage) {
-          return Scaffold(
-            appBar: AppBar(
-              leading: Icon(
+  Widget build(BuildContext widgetContext) {
+    final listBloc = BlocProvider.of<ListHandlerBloc>(widgetContext);
+
+    return BlocBuilder<NavigationBloc, NavigationState>(
+      builder: (newContext, activePage) {
+        return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(
                 Icons.account_circle_outlined,
               ),
-              title: _resolveCurrentPageTitle(context, activePage),
-              centerTitle: true,
-              actions: _resolveCurrentPageBarAction(context, activePage),
+              onPressed: () {},
             ),
-            body: _resolveCurrentPage(context, activePage),
-            bottomNavigationBar: BottomNavigationBar(
-              key: UniqueKey(),
-              currentIndex:
-                  BlocProvider.of<NavigationBloc>(context).currentPageIndex,
-              type: BottomNavigationBarType.fixed,
-              items: [
-                BottomNavigationBarItem(
-                  label: "Inbox",
-                  icon: Icon(
-                    Icons.inbox_outlined,
-                  ),
+            title: _resolveCurrentPageTitle(widgetContext, activePage),
+            centerTitle: true,
+            actions: _resolveCurrentPageBarAction(widgetContext, activePage),
+          ),
+          body: _resolveCurrentPage(widgetContext, activePage),
+          bottomNavigationBar: BottomNavigationBar(
+            key: UniqueKey(),
+            currentIndex:
+                BlocProvider.of<NavigationBloc>(widgetContext).currentPageIndex,
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                label: "Inbox",
+                icon: Icon(
+                  Icons.inbox_outlined,
                 ),
-                BottomNavigationBarItem(
-                  label: "Lists",
-                  icon: Icon(
-                    Icons.book_outlined,
-                  ),
+              ),
+              BottomNavigationBarItem(
+                label: "Lists",
+                icon: Icon(
+                  Icons.book_outlined,
                 ),
-                BottomNavigationBarItem(
-                  label: "Add",
-                  icon: Icon(
-                    Icons.add_rounded,
-                  ),
+              ),
+              BottomNavigationBarItem(
+                label: "Add",
+                icon: Icon(
+                  Icons.add_rounded,
                 ),
-                BottomNavigationBarItem(
-                  label: "Contexts",
-                  icon: Icon(
-                    Icons.fact_check_outlined,
-                  ),
+              ),
+              BottomNavigationBarItem(
+                label: "Contexts",
+                icon: Icon(
+                  Icons.fact_check_outlined,
                 ),
-                BottomNavigationBarItem(
-                  label: "Reviews",
-                  icon: Icon(
-                    Icons.local_cafe_outlined,
-                  ),
+              ),
+              BottomNavigationBarItem(
+                label: "Reviews",
+                icon: Icon(
+                  Icons.local_cafe_outlined,
                 ),
-              ],
-              onTap: (index) {
-                if (index == 2) {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (_) => AddEditTaskForm(
-                      key: UniqueKey(),
-                      isEdit: false,
-                      onSaveCallback: (title) {
-                        BlocProvider.of<TaskHandlerBloc>(context).add(
-                          TaskAdded(
-                            TaskEntity(
-                              title: title,
-                              isComplete: false,
-                              listId: 'inbox',
-                            ),
-                          ),
-                        );
+              ),
+            ],
+            onTap: (index) {
+              if (index == 2) {
+                showModalBottomSheet(
+                  context: widgetContext,
+                  builder: (_) => BlocProvider.value(
+                    value: listBloc,
+                    child: BlocBuilder<ListHandlerBloc, ListHandlerState>(
+                      builder: (context, listHandlerState) {
+                        if (listHandlerState is ListsLoadSuccess) {
+                          return AddEditTaskForm(
+                            key: UniqueKey(),
+                            isEdit: false,
+                            lists: listHandlerState.loadedLists,
+                            onSaveCallback: (title, listId) {
+                              BlocProvider.of<TaskHandlerBloc>(widgetContext)
+                                  .add(
+                                TaskAdded(
+                                  TaskEntity(
+                                    title: title,
+                                    isComplete: false,
+                                    listId: listId,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        } else
+                          return Center(child: CircularProgressIndicator());
                       },
                     ),
-                  );
-                } else {
-                  BlocProvider.of<NavigationBloc>(context)
-                      .add(PageUpdated(pageIndex: index));
-                }
-              },
-            ),
-          );
-        },
-      ),
+                  ),
+                );
+              } else {
+                BlocProvider.of<NavigationBloc>(widgetContext)
+                    .add(PageUpdated(pageIndex: index));
+              }
+            },
+          ),
+        );
+      },
     );
   }
 

@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pipelist/domain/entities/list_entity.dart';
 import 'package:pipelist/domain/entities/task_entity.dart';
 
 typedef OnSaveCallback = Function(
-  String title,
-  // String listId,
+  String updatedTitle,
+  String updatedListId,
 );
 
 class AddEditTaskForm extends StatefulWidget {
   final bool isEdit;
   final OnSaveCallback onSaveCallback;
   final TaskEntity? task;
+  final List<ListEntity> lists;
 
   const AddEditTaskForm({
     required Key key,
     required this.isEdit,
     required this.onSaveCallback,
     this.task,
+    required this.lists,
   }) : super(key: key);
 
   @override
@@ -26,8 +29,8 @@ class AddEditTaskForm extends StatefulWidget {
 class _AddEditTaskFormState extends State<AddEditTaskForm> {
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  late String _title;
-  // String _listId;
+  late String _updatedTitle;
+  late String _updatedListId;
 
   bool get isEdit => widget.isEdit;
 
@@ -61,8 +64,8 @@ class _AddEditTaskFormState extends State<AddEditTaskForm> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       widget.onSaveCallback(
-                        _title,
-                        // _listId,
+                        _updatedTitle,
+                        _updatedListId,
                       );
                       Navigator.pop(context);
                     }
@@ -75,23 +78,43 @@ class _AddEditTaskFormState extends State<AddEditTaskForm> {
                 horizontal: 35.0,
                 vertical: 10.0,
               ),
-              child: TextFormField(
-                initialValue: isEdit ? widget.task!.title : '',
-                key: UniqueKey(),
-                autofocus: true,
-                style: textTheme.headline6,
-                decoration: InputDecoration(
-                    hintText:
-                        '¿Qué tienes que hacer...?'), // TO DO: resolve without hardcoding?
-                validator: (textValue) {
-                  return textValue!.trim().isEmpty
-                      ? 'No puede estar vacío' // TO DO: resolve without hardcoding?
-                      : null;
-                },
-                onSaved: (textValue) => _title = textValue!,
+              child: Column(
+                children: [
+                  TextFormField(
+                    initialValue: isEdit ? widget.task!.title : '',
+                    key: UniqueKey(),
+                    autofocus: true,
+                    style: textTheme.headline6,
+                    decoration: InputDecoration(
+                        hintText:
+                            '¿Qué tienes que hacer...?'), // TO DO: resolve without hardcoding?
+                    validator: (textValue) {
+                      return textValue!.trim().isEmpty
+                          ? 'No puede estar vacío' // TO DO: resolve without hardcoding?
+                          : null;
+                    },
+                    onSaved: (textValue) => _updatedTitle = textValue!,
+                  ),
+                  DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      hintText: isEdit
+                          ? widget.lists
+                              .firstWhere(
+                                  (list) => list.id == widget.task!.listId)
+                              .title
+                          : 'Entrada',
+                    ),
+                    items: widget.lists.map((list) {
+                      return DropdownMenuItem<String>(
+                        value: list.id,
+                        child: Text(list.title),
+                      );
+                    }).toList(),
+                    onChanged: (newValue) => _updatedListId = newValue!,
+                  )
+                ],
               ),
             ),
-            // TO DO: List titles dropdown
           ],
         ),
       ),

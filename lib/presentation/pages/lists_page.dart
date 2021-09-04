@@ -10,7 +10,7 @@ class ListsPage extends StatelessWidget {
   const ListsPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext widgetContext) {
     return BlocBuilder<ListHandlerBloc, ListHandlerState>(
         builder: (newContext, state) {
       if (state is ListsLoadInProgress) {
@@ -33,15 +33,15 @@ class ListsPage extends StatelessWidget {
                 return ListItemWidget(
                   list: list,
                   onDismissed: (direction) {
-                    BlocProvider.of<ListHandlerBloc>(context)
+                    BlocProvider.of<ListHandlerBloc>(widgetContext)
                       ..add(ListDeleted(list));
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    ScaffoldMessenger.of(widgetContext).showSnackBar(
                       SnackBar(
                         content: Text('Lista eliminada'),
                         action: SnackBarAction(
                           label: 'DESHACER',
                           onPressed: () {
-                            BlocProvider.of<ListHandlerBloc>(context)
+                            BlocProvider.of<ListHandlerBloc>(widgetContext)
                               ..add(ListAdded(list));
                           },
                         ),
@@ -49,13 +49,21 @@ class ListsPage extends StatelessWidget {
                     );
                   },
                   onTap: () async {
-                    BlocProvider.of<TaskHandlerBloc>(context)
+                    BlocProvider.of<TaskHandlerBloc>(widgetContext)
                       ..add(TasksByListLoaded(list));
-                    await Navigator.of(context).push(
+                    await Navigator.of(widgetContext).push(
                       MaterialPageRoute(
                         builder: (_) {
-                          return BlocProvider.value(
-                            value: BlocProvider.of<TaskHandlerBloc>(context),
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider.value(
+                                value: BlocProvider.of<TaskHandlerBloc>(
+                                    widgetContext),
+                              ),
+                              BlocProvider.value(
+                                  value: BlocProvider.of<ListHandlerBloc>(
+                                      widgetContext))
+                            ],
                             child: TaskListScreen(
                               key: UniqueKey(),
                               list: list,
