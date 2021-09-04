@@ -68,4 +68,14 @@ class FirestoreRepository implements ITaskMediator, IListMediator {
         .doc(listEntity.id)
         .update(ListDto.fromEntity(listEntity).toDoc());
   }
+
+  @override
+  Stream<List<TaskEntity>> loadTasksByList(ListEntity listEntity) {
+    return _firestore.collection('tasks').snapshots().map((snapshot) {
+      return snapshot.docs
+          .map((doc) => TaskDto.fromSnapshot(doc).toEntity())
+          .where((task) => task.listId == listEntity.id)
+          .toList();
+    });
+  }
 }
