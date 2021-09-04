@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pipelist/application/blocs/list_handler/list_handler_bloc.dart';
 import 'package:pipelist/application/blocs/navigation_handler/navigation_bloc.dart';
 import 'package:pipelist/application/blocs/task_handler/task_handler_bloc.dart';
+import 'package:pipelist/domain/entities/list_entity.dart';
 import 'package:pipelist/domain/entities/task_entity.dart';
 import 'package:pipelist/infrastructure/repositories/firestore_repository.dart';
 import 'package:pipelist/presentation/pages/contexts_page.dart';
 import 'package:pipelist/presentation/pages/inbox_page.dart';
 import 'package:pipelist/presentation/pages/lists_page.dart';
 import 'package:pipelist/presentation/pages/reviews_page.dart';
+import 'package:pipelist/presentation/widgets/add_edit_list_form.dart';
 import 'package:pipelist/presentation/widgets/add_edit_task_form.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -36,7 +38,12 @@ class HomeScreen extends StatelessWidget {
         builder: (context, activePage) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Pipelist'), // Cambiar por contexto
+              leading: Icon(
+                Icons.account_circle_outlined,
+              ),
+              title: _resolveCurrentPageTitle(context, activePage),
+              centerTitle: true,
+              actions: _resolveCurrentPageBarAction(context, activePage),
             ),
             body: _resolveCurrentPage(context, activePage),
             bottomNavigationBar: BottomNavigationBar(
@@ -116,5 +123,58 @@ class HomeScreen extends StatelessWidget {
     else if (activePage is ContextsPageLoadSucceded)
       return ContextsPage();
     else if (activePage is ReviewsPageLoadSucceded) return ReviewsPage();
+  }
+
+  _resolveCurrentPageTitle(BuildContext context, NavigationState activePage) {
+    if (activePage is InboxPageLoadSucceded)
+      return Text('Entrada');
+    else if (activePage is ListsPageLoadSucceded)
+      return Text('Listas');
+    else if (activePage is ContextsPageLoadSucceded)
+      return Text('Contextos');
+    else if (activePage is ReviewsPageLoadSucceded) return Text('Revisiones');
+  }
+
+  _resolveCurrentPageBarAction(
+      BuildContext context, NavigationState activePage) {
+    if (activePage is InboxPageLoadSucceded)
+      return [
+        IconButton(
+          icon: Icon(Icons.filter_alt),
+          onPressed: () {},
+        )
+      ];
+    else if (activePage is ListsPageLoadSucceded) {
+      return [
+        IconButton(
+          key: UniqueKey(),
+          icon: Icon(Icons.add_rounded),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (_) => AddEditListForm(
+                key: UniqueKey(),
+                isEdit: false,
+                onSaveCallback: (title) {
+                  BlocProvider.of<ListHandlerBloc>(context).add(
+                    ListAdded(
+                      ListEntity(
+                        title: title,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+      ];
+    } else
+      return [
+        IconButton(
+          icon: Icon(Icons.more_vert_rounded),
+          onPressed: () {},
+        )
+      ];
   }
 }
