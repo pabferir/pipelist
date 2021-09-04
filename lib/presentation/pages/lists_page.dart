@@ -32,6 +32,22 @@ class ListsPage extends StatelessWidget {
                 final list = lists[index];
                 return ListItemWidget(
                   list: list,
+                  onDismissed: (direction) {
+                    BlocProvider.of<ListHandlerBloc>(context)
+                      ..add(ListDeleted(list));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Lista eliminada'),
+                        action: SnackBarAction(
+                          label: 'DESHACER',
+                          onPressed: () {
+                            BlocProvider.of<ListHandlerBloc>(context)
+                              ..add(ListAdded(list));
+                          },
+                        ),
+                      ),
+                    );
+                  },
                   onTap: () async {
                     BlocProvider.of<TaskHandlerBloc>(context)
                       ..add(TasksByListLoaded(list));
