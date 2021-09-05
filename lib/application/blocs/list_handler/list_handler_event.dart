@@ -56,3 +56,17 @@ class ListsChanged extends ListHandlerEvent {
   @override
   String toString() => 'ListsChanged { listsEntities: $listsEntities }';
 }
+
+class UserListsLoaded extends ListHandlerEvent {}
+
+class UserListsChanged extends ListHandlerEvent {
+  final List<ListEntity> listsEntities;
+
+  const UserListsChanged(this.listsEntities);
+
+  @override
+  List<Object> get props => [listsEntities];
+
+  @override
+  String toString() => 'UserListsChanged { listsEntities: $listsEntities }';
+}

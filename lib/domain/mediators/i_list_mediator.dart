@@ -5,4 +5,5 @@ abstract class IListMediator {
   Stream<List<ListEntity>> loadLists();
   Future<void> updateList(ListEntity listEntity);
   Future<void> deleteList(ListEntity listEntity);
+  Stream<List<ListEntity>> loadUserLists();
 }

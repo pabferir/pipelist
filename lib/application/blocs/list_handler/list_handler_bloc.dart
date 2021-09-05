@@ -32,6 +32,10 @@ class ListHandlerBloc extends Bloc<ListHandlerEvent, ListHandlerState> {
       yield* _mapListDeletedToState(event);
     } else if (event is ListsChanged) {
       yield* _mapListsChangedToState(event);
+    } else if (event is UserListsLoaded) {
+      yield* _mapUserListsLoadedToState();
+    } else if (event is UserListsChanged) {
+      yield* _mapUserListsChangedToState(event);
     }
   }
 
@@ -60,5 +64,21 @@ class ListHandlerBloc extends Bloc<ListHandlerEvent, ListHandlerState> {
 
   Stream<ListHandlerState> _mapListsChangedToState(ListsChanged event) async* {
     yield ListsLoadSuccess(event.listsEntities);
+  }
+
+  Stream<ListHandlerState> _mapUserListsLoadedToState() async* {
+    _streamSubscription?.cancel();
+    _streamSubscription = _mediator.loadUserLists().listen(
+      (lists) {
+        add(
+          ListsChanged(lists),
+        );
+      },
+    );
+  }
+
+  Stream<ListHandlerState> _mapUserListsChangedToState(
+      UserListsChanged event) async* {
+    yield UserListsLoadSuccess(event.listsEntities);
   }
 }

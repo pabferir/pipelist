@@ -33,6 +33,16 @@ class FirestoreRepository implements ITaskMediator, IListMediator {
   }
 
   @override
+  Stream<List<TaskEntity>> loadTasksInInbox() {
+    return _firestore.collection('tasks').snapshots().map((snapshot) {
+      return snapshot.docs
+          .map((doc) => TaskDto.fromSnapshot(doc).toEntity())
+          .where((task) => task.listId == inboxEntity.id)
+          .toList();
+    });
+  }
+
+  @override
   Future<void> updateTask(TaskEntity taskEntity) {
     return _firestore
         .collection('tasks')
@@ -63,6 +73,16 @@ class FirestoreRepository implements ITaskMediator, IListMediator {
   }
 
   @override
+  Stream<List<ListEntity>> loadUserLists() {
+    return _firestore.collection('lists').snapshots().map((snapshot) {
+      return snapshot.docs
+          .map((doc) => ListDto.fromSnapshot(doc).toEntity())
+          .where((list) => list.id != inboxEntity.id)
+          .toList();
+    });
+  }
+
+  @override
   Future<void> updateList(ListEntity listEntity) {
     return _firestore
         .collection('lists')
@@ -76,16 +96,6 @@ class FirestoreRepository implements ITaskMediator, IListMediator {
       return snapshot.docs
           .map((doc) => TaskDto.fromSnapshot(doc).toEntity())
           .where((task) => task.listId == listEntity.id)
-          .toList();
-    });
-  }
-
-  @override
-  Stream<List<TaskEntity>> loadTasksInInbox() {
-    return _firestore.collection('tasks').snapshots().map((snapshot) {
-      return snapshot.docs
-          .map((doc) => TaskDto.fromSnapshot(doc).toEntity())
-          .where((task) => task.listId == inboxEntity.id)
           .toList();
     });
   }
