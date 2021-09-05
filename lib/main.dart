@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pipelist/application/blocs/bloc/clarify_bloc.dart';
 import 'package:pipelist/presentation/screens/home_screen.dart';
 
 import 'application/blocs/list_handler/list_handler_bloc.dart';
@@ -40,6 +41,11 @@ class PipelistApp extends StatelessWidget {
             create: (context) {
               return ListHandlerBloc(mediator: _firestoreRepository)
                 ..add(ListsLoaded());
+            },
+          ),
+          BlocProvider<ClarifyBloc>(
+            create: (context) {
+              return ClarifyBloc()..add(ClarifyStarted());
             },
           ),
         ],
