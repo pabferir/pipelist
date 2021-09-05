@@ -27,7 +27,7 @@ class AddEditTaskForm extends StatefulWidget {
 }
 
 class _AddEditTaskFormState extends State<AddEditTaskForm> {
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   late String _updatedTitle;
   late String _updatedListId;
@@ -40,7 +40,7 @@ class _AddEditTaskFormState extends State<AddEditTaskForm> {
 
     return Container(
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: ListView(
           children: [
             Row(
@@ -61,8 +61,8 @@ class _AddEditTaskFormState extends State<AddEditTaskForm> {
                   key: UniqueKey(),
                   child: Icon(Icons.arrow_upward_rounded),
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
                       widget.onSaveCallback(
                         _updatedTitle,
                         _updatedListId,
