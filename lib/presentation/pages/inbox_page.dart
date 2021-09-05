@@ -15,9 +15,9 @@ class InboxPage extends StatelessWidget {
 
     return BlocBuilder<TaskHandlerBloc, TaskHandlerState>(
       builder: (newContext, state) {
-        if (state is TasksLoadInProgress) {
+        if (state is TasksInInboxLoadInProgress) {
           return Center(child: CircularProgressIndicator());
-        } else if (state is TasksLoadSuccess) {
+        } else if (state is TasksInInboxLoadSuccess) {
           final tasks = state.loadedTasks;
           if (tasks.isEmpty) {
             return _showEmptyPageLayout();

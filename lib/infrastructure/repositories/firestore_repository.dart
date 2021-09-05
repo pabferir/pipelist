@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pipelist/constants.dart';
 import 'package:pipelist/domain/entities/list_entity.dart';
 import 'package:pipelist/domain/entities/task_entity.dart';
 import 'package:pipelist/domain/mediators/i_list_mediator.dart';
@@ -84,7 +85,7 @@ class FirestoreRepository implements ITaskMediator, IListMediator {
     return _firestore.collection('tasks').snapshots().map((snapshot) {
       return snapshot.docs
           .map((doc) => TaskDto.fromSnapshot(doc).toEntity())
-          .where((task) => task.listId == '0riRibn8ZvbqwJ7fKpHp')
+          .where((task) => task.listId == inboxEntity.id)
           .toList();
     });
   }

@@ -113,10 +113,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  _resolveCurrentPage(BuildContext context, NavigationState activePage) {
-    if (activePage is InboxPageLoadSucceded)
+  _resolveCurrentPage(BuildContext widgetContext, NavigationState activePage) {
+    if (activePage is InboxPageLoadSucceded) {
+      BlocProvider.of<TaskHandlerBloc>(widgetContext)
+        ..add(TasksInInboxLoaded());
       return InboxPage();
-    else if (activePage is ListsPageLoadSucceded)
+    } else if (activePage is ListsPageLoadSucceded)
       return ListsPage();
     else if (activePage is ContextsPageLoadSucceded)
       return ContextsPage();

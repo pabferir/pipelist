@@ -72,7 +72,7 @@ class TaskListScreen extends StatelessWidget {
                               value: listBloc,
                               child: BlocBuilder<ListHandlerBloc,
                                   ListHandlerState>(
-                                builder: (widgetContext, listHandlerState) {
+                                builder: (newContext, listHandlerState) {
                                   if (listHandlerState is ListsLoadSuccess) {
                                     return AddEditTaskForm(
                                       key: UniqueKey(),
