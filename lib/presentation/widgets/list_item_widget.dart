@@ -5,12 +5,14 @@ import 'package:pipelist/domain/entities/list_entity.dart';
 class ListItemWidget extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
   final GestureTapCallback onTap;
+  final GestureLongPressCallback? onLongPress;
   final ListEntity list;
 
   const ListItemWidget({
     Key? key,
     required this.onDismissed,
     required this.onTap,
+    this.onLongPress,
     required this.list,
   }) : super(key: key);
 
@@ -21,6 +23,7 @@ class ListItemWidget extends StatelessWidget {
       onDismissed: onDismissed,
       child: ListTile(
         onTap: onTap,
+        onLongPress: onLongPress,
         title: Hero(
           tag: '${list.id}__heroTag',
           child: Container(

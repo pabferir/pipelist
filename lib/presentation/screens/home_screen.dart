@@ -118,9 +118,10 @@ class HomeScreen extends StatelessWidget {
       BlocProvider.of<TaskHandlerBloc>(widgetContext)
         ..add(TasksInInboxLoaded());
       return InboxPage();
-    } else if (activePage is ListsPageLoadSucceded)
+    } else if (activePage is ListsPageLoadSucceded) {
+      // BlocProvider.of<ListHandlerBloc>(widgetContext)..add(UserListsLoaded());
       return ListsPage();
-    else if (activePage is ContextsPageLoadSucceded)
+    } else if (activePage is ContextsPageLoadSucceded)
       return ContextsPage();
     else if (activePage is ReviewsPageLoadSucceded) return ReviewsPage();
   }

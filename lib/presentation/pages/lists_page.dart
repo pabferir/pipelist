@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pipelist/application/blocs/list_handler/list_handler_bloc.dart';
 import 'package:pipelist/application/blocs/task_handler/task_handler_bloc.dart';
 import 'package:pipelist/presentation/screens/task_list_screen.dart';
+import 'package:pipelist/presentation/widgets/add_edit_list_form.dart';
 import 'package:pipelist/presentation/widgets/list_item_widget.dart';
 
 class ListsPage extends StatelessWidget {
@@ -11,6 +12,8 @@ class ListsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext widgetContext) {
+    final listBloc = BlocProvider.of<ListHandlerBloc>(widgetContext);
+
     return BlocBuilder<ListHandlerBloc, ListHandlerState>(
         builder: (newContext, state) {
       if (state is ListsLoadInProgress) {
@@ -73,6 +76,36 @@ class ListsPage extends StatelessWidget {
                       ),
                     );
                   },
+                  onLongPress: () {
+                    showModalBottomSheet(
+                      context: widgetContext,
+                      builder: (_) {
+                        return BlocProvider.value(
+                          value: listBloc,
+                          child: BlocBuilder<ListHandlerBloc, ListHandlerState>(
+                            builder: (newContext, listHandlerState) {
+                              if (listHandlerState is ListsLoadSuccess) {
+                                return AddEditListForm(
+                                  key: UniqueKey(),
+                                  isEdit: true,
+                                  list: list,
+                                  onSaveCallback: (title) {
+                                    BlocProvider.of<ListHandlerBloc>(
+                                            widgetContext)
+                                        .add(ListUpdated(list.copyWith(
+                                      title: title,
+                                    )));
+                                  },
+                                );
+                              } else
+                                return Center(
+                                    child: CircularProgressIndicator());
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
                 );
               },
             ),
@@ -112,7 +145,7 @@ class ListsPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Error al cargar las tareas',
+            'Error al cargar las listas',
             style: TextStyle(color: Colors.red),
           ),
         ],
