@@ -60,3 +60,28 @@ class TasksChanged extends TaskHandlerEvent {
   @override
   String toString() => 'TasksChanged { tasksEntities: $tasksEntities }';
 }
+
+class TasksByListLoaded extends TaskHandlerEvent {
+  final ListEntity listEntity;
+
+  const TasksByListLoaded(this.listEntity);
+  @override
+  List<Object> get props => [listEntity];
+
+  @override
+  String toString() => 'TasksByListLoaded { listEntity: $listEntity }';
+}
+
+class TasksInInboxLoaded extends TaskHandlerEvent {}
+
+class TasksInInboxChanged extends TaskHandlerEvent {
+  final List<TaskEntity> tasksEntities;
+
+  const TasksInInboxChanged(this.tasksEntities);
+
+  @override
+  List<Object> get props => [tasksEntities];
+
+  @override
+  String toString() => 'TasksInInboxChanged { tasksEntities: $tasksEntities }';
+}

@@ -25,10 +25,10 @@ class TaskDto {
 
   TaskEntity toEntity() {
     return TaskEntity(
-      id: id,
-      title: title,
-      isComplete: isComplete,
-      listId: listId,
+      id: this.id,
+      title: this.title,
+      isComplete: this.isComplete,
+      listId: this.listId,
     );
   }
 
@@ -43,10 +43,10 @@ class TaskDto {
 
   Map<String, Object> toJson() {
     return {
-      'id': id,
-      'title': title,
-      'isComplete': isComplete,
-      'listId': listId,
+      'id': this.id,
+      'title': this.title,
+      'isComplete': this.isComplete,
+      'listId': this.listId,
     };
   }
 
@@ -61,9 +61,9 @@ class TaskDto {
 
   Map<String, Object> toDoc() {
     return {
-      'title': title,
-      'isComplete': isComplete,
-      'listId': listId,
+      'title': this.title,
+      'isComplete': this.isComplete,
+      'listId': this.listId,
     };
   }
 }

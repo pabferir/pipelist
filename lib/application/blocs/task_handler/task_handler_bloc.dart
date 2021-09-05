@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:pipelist/domain/entities/list_entity.dart';
 import 'package:pipelist/domain/entities/task_entity.dart';
 import 'package:pipelist/domain/mediators/i_task_mediator.dart';
 
@@ -35,6 +36,12 @@ class TaskHandlerBloc extends Bloc<TaskHandlerEvent, TaskHandlerState> {
       yield* _mapToggleAllTasksToState();
     } else if (event is TasksChanged) {
       yield* _mapTasksChangedToState(event);
+    } else if (event is TasksByListLoaded) {
+      yield* _mapTasksByListLoadedToState(event);
+    } else if (event is TasksInInboxLoaded) {
+      yield* _mapTasksInInboxLoadedToState();
+    } else if (event is TasksInInboxChanged) {
+      yield* _mapTasksInInboxChangedToState(event);
     }
   }
 
@@ -67,5 +74,33 @@ class TaskHandlerBloc extends Bloc<TaskHandlerEvent, TaskHandlerState> {
 
   Stream<TaskHandlerState> _mapTasksChangedToState(TasksChanged event) async* {
     yield TasksLoadSuccess(event.tasksEntities);
+  }
+
+  Stream<TaskHandlerState> _mapTasksByListLoadedToState(
+      TasksByListLoaded event) async* {
+    _streamSubscription?.cancel();
+    _streamSubscription = _mediator.loadTasksByList(event.listEntity).listen(
+      (tasks) {
+        add(
+          TasksChanged(tasks),
+        );
+      },
+    );
+  }
+
+  Stream<TaskHandlerState> _mapTasksInInboxLoadedToState() async* {
+    _streamSubscription?.cancel();
+    _streamSubscription = _mediator.loadTasksInInbox().listen(
+      (tasks) {
+        add(
+          TasksInInboxChanged(tasks),
+        );
+      },
+    );
+  }
+
+  Stream<TaskHandlerState> _mapTasksInInboxChangedToState(
+      TasksInInboxChanged event) async* {
+    yield TasksInInboxLoadSuccess(event.tasksEntities);
   }
 }

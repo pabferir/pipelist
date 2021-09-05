@@ -1,19 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pipelist/domain/entities/task_entity.dart';
+import 'package:flutter/widgets.dart';
+import 'package:pipelist/domain/entities/list_entity.dart';
 
-class TaskItemWidget extends StatelessWidget {
+class ListItemWidget extends StatelessWidget {
   final DismissDirectionCallback onDismissed;
   final GestureTapCallback onTap;
-  final ValueChanged<bool?>? onCompleteToggle;
-  final TaskEntity task;
+  final GestureLongPressCallback? onLongPress;
+  final ListEntity list;
 
-  const TaskItemWidget({
+  const ListItemWidget({
     Key? key,
     required this.onDismissed,
     required this.onTap,
-    required this.onCompleteToggle,
-    required this.task,
+    this.onLongPress,
+    required this.list,
   }) : super(key: key);
 
   @override
@@ -23,22 +23,19 @@ class TaskItemWidget extends StatelessWidget {
       onDismissed: onDismissed,
       child: ListTile(
         onTap: onTap,
-        leading: Checkbox(
-          key: UniqueKey(),
-          value: task.isComplete,
-          onChanged: onCompleteToggle,
-        ),
+        onLongPress: onLongPress,
         title: Hero(
-          tag: '${task.id}__heroTag',
+          tag: '${list.id}__heroTag',
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Text(
-              task.title,
+              list.title,
               key: UniqueKey(),
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
         ),
+        trailing: Icon(Icons.navigate_next_rounded),
       ),
       background: Container(color: Colors.red),
     );
